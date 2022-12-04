@@ -1,0 +1,15 @@
+{
+  "name": "commits",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "run": "node commits.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "octokit": "^2.0.10"
+  }
+}
