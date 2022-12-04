@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const { withSentryConfig } = require('@sentry/nextjs')
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -13,10 +15,9 @@ const nextConfig = {
       },
     ],
   },
-}
-
-module.exports = {
-  ...nextConfig,
+  sentry: {
+    hideSourceMaps: true,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -26,3 +27,9 @@ module.exports = {
     return config
   },
 }
+
+const sentryWebpackPluginOptions = {
+  silent: true,
+}
+
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions)
