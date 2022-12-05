@@ -56,3 +56,34 @@ export const ProfileCardContainer = styled.div`
     }
   }
 `
+
+export const ProfileCardSocials = styled.div`
+  padding: 0 15px;
+
+  .socials {
+    &__heading {
+      font-size: 18px;
+      line-height: 24px;
+      margin-top: 24px;
+      font-family: var(--font-heading);
+    }
+
+    &__list {
+      margin: 10px -8px -10px -8px;
+    }
+
+    &__item {
+      padding: 0px 8px 10px 8px;
+      width: 72px;
+      display: inline-block;
+      line-height: 1.29;
+
+      &--icon {
+        svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+  }
+`

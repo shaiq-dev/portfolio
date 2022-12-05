@@ -36,9 +36,14 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
 
     &.link {
       color: var(--blue);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
