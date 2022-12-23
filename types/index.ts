@@ -12,3 +12,11 @@ export type WorkExperience = Array<{
   description: string
   positions: CompanyPosition[]
 }>
+
+export type MediumShortPost = {
+  title: string
+  pubDate: string
+  link: string
+  thumbnail: string
+  categories: string[]
+}

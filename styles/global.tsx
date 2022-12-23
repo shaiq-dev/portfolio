@@ -55,6 +55,12 @@ const GlobalStyle = createGlobalStyle`
     color: var(--text-heading);
   }
 
+  hr {
+    border: 0;
+    border-bottom: 1px solid var(--gray-1);
+    margin: 0;
+  }
+
   /* Utility classes */
 
   .d-flex {
@@ -80,6 +86,18 @@ const GlobalStyle = createGlobalStyle`
       flex: 1;
     }
 
+    &.f-grow-1 {
+      flex-grow: 1;
+    }
+
+  }
+
+  .d-in-block {
+    display: inline-block;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
   }
 
   /* Header Sticky Styles */

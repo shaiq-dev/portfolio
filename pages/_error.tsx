@@ -1,14 +1,20 @@
 import { NextPageContext } from 'next'
-import NextErrorComponent, { ErrorProps } from 'next/error'
 import * as Sentry from '@sentry/nextjs'
 
-const ErrorComponent = (props: ErrorProps) => {
-  return <NextErrorComponent statusCode={props.statusCode} />
+import E404 from 'components/Errors/E404'
+
+const Error = ({
+  statusCode,
+}: {
+  __isLayoutDisabled: boolean
+  statusCode: number
+}) => {
+  return <E404 />
 }
 
-ErrorComponent.getInitialProps = async (contextData: NextPageContext) => {
+Error.getInitialProps = async (contextData: NextPageContext) => {
   await Sentry.captureUnderscoreErrorException(contextData)
-  return NextErrorComponent.getInitialProps(contextData)
+  return { __isLayoutDisabled: true, statusCode: contextData.res?.statusCode }
 }
 
-export default ErrorComponent
+export default Error

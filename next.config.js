@@ -13,6 +13,16 @@ const nextConfig = {
         hostname: 'media.graphassets.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '*.medium.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
     ],
   },
   sentry: {

@@ -4,6 +4,7 @@ import Header from 'components/Header'
 import TopNav from 'components/TopNav'
 
 import { HomeLayoutContainer } from './layout.styled'
+import Footer from '../components/Footer'
 
 const HomeLayout = ({ children }: React.PropsWithChildren) => {
   return (
@@ -18,6 +19,7 @@ const HomeLayout = ({ children }: React.PropsWithChildren) => {
           <TopNav />
           {children}
         </div>
+        <Footer />
       </HomeLayoutContainer>
     </>
   )
