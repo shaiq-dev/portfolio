@@ -3,13 +3,13 @@ import * as Sentry from '@sentry/nextjs'
 
 import E404 from 'components/Errors/E404'
 
-const Error = ({
-  statusCode,
-}: {
+type Props = {
   __isLayoutDisabled: boolean
   statusCode: number
-}) => {
-  console.log('Error Occured ', statusCode)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Error = (props: Props) => {
   return <E404 />
 }
 
