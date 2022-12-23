@@ -10,7 +10,12 @@ const Socials = () => {
         {Constants.Profiles.map(({ name, handle, icon: Icon }, index) => {
           return (
             <div className="socials__item" key={index}>
-              <a href={handle} className="d-flex flex-column ac link">
+              <a
+                href={handle}
+                className="d-flex flex-column ac link"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <div className="socials__item--icon">
                   <Icon />
                 </div>
