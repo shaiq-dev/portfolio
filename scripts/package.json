@@ -1,13 +1,11 @@
 {
-  "name": "commits",
+  "name": "shaiq-portfolio-scripts",
   "version": "1.0.0",
-  "description": "",
   "type": "module",
   "scripts": {
-    "run": "node commits.js"
+    "start:commits": "node --no-warnings commits.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Shaiq Kar",
   "license": "ISC",
   "dependencies": {
     "octokit": "^2.0.10"

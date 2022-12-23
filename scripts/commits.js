@@ -3,20 +3,24 @@ import { throttling } from '@octokit/plugin-throttling'
 import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 
-const GIT_TOKEN = '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'
-const GIT_USER = 'shaiq-dev'
-const GIT_EMAIL = 'shaiqkar@gmail.com'
+import { updateCommitCount } from './hygraph.js'
+
+const GIT_TOKEN = process.env.GIT_TOKEN
+const GIT_USER = process.env.GIT_USER
 
 /**
  * These are empty repos. GitHub Api returns an error if
  * trying to request any data from them. This list can
  * also include the orgs you want to ignore.
  */
-const blackListedRepos = ['gowebknot/Package-Registry']
-const blackListedOrgs = ['EpicGames']
+const blackListedRepos = [...(process.env.BLACK_LISTED_REPOS || '').split(',')]
+const blackListedOrgs = [...(process.env.BLACK_LISTED_ORGS || '').split(',')]
 
-// List of things to ignore in branches
-const bots = ['dependabot', 'dependabot-preview', 'restyled/']
+// List of branches that are created by bots
+const bots = [
+  ...(process.env.BOTS || '').split(','),
+  ...['dependabot', 'dependabot-preview', 'restyled/'],
+]
 
 const PluggedKit = Octokit.plugin(throttling, paginateRest, restEndpointMethods)
 const octokit = new PluggedKit({
@@ -42,6 +46,10 @@ const octokit = new PluggedKit({
     },
   },
 })
+
+console.log(
+  "🏁 Started the script. Let's see how many commits we have made so far"
+)
 
 const repos = (
   await octokit.paginate(octokit.rest.repos.listForAuthenticatedUser, {
@@ -74,6 +82,8 @@ await Promise.all(
   })
 )
 
+console.log("🌳 Got all the branches for all the repos. Let's get the commits")
+
 const allContributions = (
   await Promise.all(
     Object.entries(repoTree).map(async ([repo, branches]) => {
@@ -99,4 +109,10 @@ const allContributions = (
   )
 ).reduce((acc, curr) => acc + curr, 0)
 
-console.log(allContributions)
+console.log(`Total ${allContributions} 💪 made so far`)
+
+/**
+ * The total can be stored anywhere now. I am using hygraph as a
+ * headless CMS for this project, so i will be storing it there.
+ */
+updateCommitCount(allContributions)
