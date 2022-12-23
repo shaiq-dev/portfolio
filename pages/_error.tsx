@@ -9,6 +9,7 @@ const Error = ({
   __isLayoutDisabled: boolean
   statusCode: number
 }) => {
+  console.log('Error Occured ', statusCode)
   return <E404 />
 }
 
