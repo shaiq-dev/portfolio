@@ -7,7 +7,7 @@ import Constants from 'constants/index'
 import { ProfileCardContainer } from './profileCard.styled'
 import Socials from './Socials'
 
-const ProfileCard = ({ avatar }: { avatar: string }) => {
+const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
   const [resumeLink, setResumeLink] = useState('')
 
   useEffect(() => {
@@ -48,6 +48,7 @@ const ProfileCard = ({ avatar }: { avatar: string }) => {
             Download Resume
           </a>
         </div>
+        <div className="profile__bio">{bio}</div>
         <Socials />
       </div>
     </ProfileCardContainer>

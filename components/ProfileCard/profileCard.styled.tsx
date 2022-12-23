@@ -54,6 +54,13 @@ export const ProfileCardContainer = styled.div`
         width: 24px;
       }
     }
+
+    &__bio {
+      padding: 0 15px;
+      overflow: hidden;
+      margin: 13px 0 6px;
+      color: #4d5156;
+    }
   }
 `
 

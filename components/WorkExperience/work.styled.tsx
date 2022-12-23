@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const WorkExpContainer = styled.div`
-  margin-top: 6px;
+  margin: 6px 0px 44px;
   font-size: 14px;
   color: var(--gray-3);
   line-height: var(--lh-norm);
