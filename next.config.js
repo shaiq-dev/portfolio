@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const { withSentryConfig } = require('@sentry/nextjs')
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -18,15 +16,7 @@ const nextConfig = {
         hostname: '*.medium.com',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        pathname: '/**',
-      },
     ],
-  },
-  sentry: {
-    hideSourceMaps: true,
   },
   webpack(config) {
     config.module.rules.push({
@@ -38,8 +28,4 @@ const nextConfig = {
   },
 }
 
-const sentryWebpackPluginOptions = {
-  silent: true,
-}
-
-module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+module.exports = nextConfig
