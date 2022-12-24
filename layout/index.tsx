@@ -11,6 +11,10 @@ const HomeLayout = ({ children }: React.PropsWithChildren) => {
     <>
       <Head>
         <title>shaiq kar - Google Search</title>
+        <meta
+          name="google-site-verification"
+          content="ouDVbST3T8-LW94heAgxjwU_cY7m60Qr3z3vkxt7sSU"
+        />
       </Head>
       <Header />
       <HomeLayoutContainer>
