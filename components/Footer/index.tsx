@@ -12,6 +12,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <div className="footer__bar secondary">
+          <div className="footer__bar--content">
+            Google and the Google logo are registered trademarks of Google LLC.
+          </div>
+        </div>
       </div>
     </FooterContainer>
   )

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const FooterContainer = styled.div`
   height: 106px;
   padding-top: 12px;
+  box-sizing: content-box;
 
   .footer {
     &__wrapper {
@@ -28,6 +29,10 @@ export const FooterContainer = styled.div`
         border-left: 1px solid #dadce0;
         font-weight: 600;
         color: #4d5156;
+      }
+
+      &.secondary {
+        border-bottom: none;
       }
     }
   }
