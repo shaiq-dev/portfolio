@@ -31,7 +31,7 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
           </div>
           <div className="profile__header--avatar d-flex ac">
             <div className="img">
-              <Image src={avatar} alt="Shaiq" width={119} height={128} />
+              <Image src={avatar} alt="Shaiq" width={119} height={119} />
             </div>
           </div>
         </div>
