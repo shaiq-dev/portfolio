@@ -40,4 +40,4 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
 
       - name: Update Commit Count
-        run: node --no-warnings commits.js
+        run: pwd && cd scripts && node --no-warnings commits.js
