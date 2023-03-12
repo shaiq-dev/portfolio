@@ -23,7 +23,11 @@ const PostItem = ({
       <div className="item__container">
         <div className="d-flex flex-column f-grow-1">
           <div className="item__wrapper">
-            <a href={link} className="d-flex flex-column f-grow-1">
+            <a
+              href={link}
+              className="d-flex flex-column f-grow-1"
+              target="_blank"
+            >
               <div className="item__image">
                 <img src={thumbnail} alt="Post Image" />
               </div>
