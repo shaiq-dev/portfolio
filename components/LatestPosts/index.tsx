@@ -27,6 +27,7 @@ const PostItem = ({
               href={link}
               className="d-flex flex-column f-grow-1"
               target="_blank"
+              rel="noreferrer"
             >
               <div className="item__image">
                 <img src={thumbnail} alt="Post Image" />
