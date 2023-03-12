@@ -10,10 +10,6 @@ import Instagram from 'assets/icons/instagram.svg'
 import Twitter from 'assets/icons/twitter.svg'
 import LinkedIn from 'assets/icons/linkedin.svg'
 
-// import GitHub from 'assets/icons/github.png'
-// import Instagram from 'assets/icons/instagram.png'
-// import Twitter from 'assets/icons/twitter.png'
-// import LinkedIn from 'assets/icons/linkedin.png'
 
 const Constants = {
   Nav: [
