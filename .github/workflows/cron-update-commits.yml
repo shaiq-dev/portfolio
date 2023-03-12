@@ -20,4 +20,23 @@ jobs:
 
       - name: Update Commit Count
         working-directory: scripts
-        run: node --no-warnings commits.js
+        env:
+          ACTIVE_CONFIG_VERSION: ${{ secrets.ACTIVE_CONFIG_VERSION }}
+          BLACK_LISTED_BOTS: ${{ secrets.BLACK_LISTED_BOTS }}
+          BLACK_LISTED_ORGS: ${{ secrets.BLACK_LISTED_ORGS }}
+          BLACK_LISTED_REPOS: ${{ secrets.BLACK_LISTED_REPOS }}
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GIT_USER: ${{ secrets.GIT_USER }}
+          HYGRAPH_ENDPOINT: ${{ secrets.HYGRAPH_ENDPOINT }}
+          HYGRAPH_TOKEN: ${{ secrets.HYGRAPH_TOKEN }}
+        run: |
+          env \
+            ACTIVE_CONFIG_VERSION=$ACTIVE_CONFIG_VERSION \
+            BLACK_LISTED_BOTS=$BLACK_LISTED_BOTS \
+            BLACK_LISTED_ORGS=$BLACK_LISTED_ORGS \
+            BLACK_LISTED_REPOS=$BLACK_LISTED_REPOS \
+            GIT_TOKEN=$GIT_TOKEN \
+            GIT_USER=$GIT_USER \
+            HYGRAPH_ENDPOINT=$HYGRAPH_ENDPOINT \
+            HYGRAPH_TOKEN=$HYGRAPH_TOKEN \
+            node --no-warnings commits.js
