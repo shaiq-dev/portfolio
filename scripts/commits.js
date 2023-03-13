@@ -104,7 +104,9 @@ const allContributions = (
           return commits.map((commit) => commit.sha)
         })
       )
-      return new Set(contributions.flat()).size
+      const contributionsCount = new Set(contributions.flat()).size
+      console.log(`${repoName} | ${contributionsCount}`)
+      return contributionsCount
     })
   )
 ).reduce((acc, curr) => acc + curr, 0)
