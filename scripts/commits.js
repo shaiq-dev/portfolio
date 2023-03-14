@@ -16,12 +16,6 @@ const GIT_USER = process.env.GIT_USER
 const blackListedRepos = [...(process.env.BLACK_LISTED_REPOS || '').split(',')]
 const blackListedOrgs = [...(process.env.BLACK_LISTED_ORGS || '').split(',')]
 
-// List of branches that are created by bots
-const bots = [
-  ...(process.env.BOTS || '').split(','),
-  ...['dependabot', 'dependabot-preview', 'restyled/'],
-]
-
 const PluggedKit = Octokit.plugin(throttling, paginateRest, restEndpointMethods)
 const octokit = new PluggedKit({
   auth: GIT_TOKEN,
@@ -75,10 +69,7 @@ await Promise.all(
         per_page: 100,
       }
     )
-    repoTree[repo] = repoBranches
-      .map((branch) => branch.name)
-      // filter out bot branches
-      .filter((branch) => !bots.some((bot) => branch.includes(bot)))
+    repoTree[repo] = repoBranches.map((branch) => branch.name)
   })
 )
 
@@ -88,6 +79,7 @@ const allContributions = (
   await Promise.all(
     Object.entries(repoTree).map(async ([repo, branches]) => {
       const [org, repoName] = repo.split('/')
+      console.log(`[${repoName}]`)
       const contributions = await Promise.all(
         branches.map(async (branch) => {
           const commits = await octokit.paginate(
@@ -100,7 +92,6 @@ const allContributions = (
               per_page: 100,
             }
           )
-
           return commits.map((commit) => commit.sha)
         })
       )
