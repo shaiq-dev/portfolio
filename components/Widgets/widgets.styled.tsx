@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const AppBarContainer = styled.div`
-  margin-left: 180px;
+  margin-left: var(--center-abs-margin);
   display: flex;
   align-items: center;
   height: 43px;
