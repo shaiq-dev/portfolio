@@ -8,7 +8,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
+  }
+  
+  :root {
     --center-abs-margin: 180px;
     --center-width: 652px;
     --r-margin: 60px;
@@ -129,6 +131,49 @@ const GlobalStyle = createGlobalStyle`
       box-shadow: none;
       border: 1px solid #dfe1e5;
       margin-left: 14px;
+    }
+  }
+
+  /* CSS variable reset based on size */
+  @media (min-width:1459px) and (max-width:1659px) {
+    :root {
+      --center-abs-margin: calc(25vw + -184.75px)
+    }
+  }
+
+  @media (min-width:1659px) {
+    :root {
+      --center-abs-margin: 230px
+    }
+  }
+
+  @media (min-width:1459px) and (max-width:1539px) {
+    :root {
+      --r-margin: calc(50vw + -669px)
+    }
+  }
+
+  @media (min-width:1539px) {
+    :root {
+      --r-margin: 100px
+    }
+  }
+
+  @media (min-width:1121px) and (max-width:1300px) {
+    :root {
+      --center-abs-margin: calc((100vw - 1065px)/2)
+    }
+  }
+
+  @media (max-width:1121px) {
+    :root {
+      --center-abs-margin: 28px
+    }
+  }
+
+  @media (max-width:1300px) {
+    :root {
+      --r-margin: 44px
     }
   }
 
