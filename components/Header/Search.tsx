@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { SearchContainer, SearchInput } from './header.styled'
+import SearchIcon from 'assets/icons/search.svg'
 
 const Search = () => {
   return (
@@ -15,8 +16,16 @@ const Search = () => {
         />
       </div>
       <SearchInput>
-        <div className="search__input--container flex"></div>
-        <button className="search__btn"></button>
+        <div className="search__input--container d-flex f-1">
+          <div className="d-flex f-1 f-wrap">
+            <input type="text" value="Shaiq Kar" />
+          </div>
+        </div>
+        <button className="search__btn">
+          <div className="icon">
+            <SearchIcon />
+          </div>
+        </button>
       </SearchInput>
     </SearchContainer>
   )

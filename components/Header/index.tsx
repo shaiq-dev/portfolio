@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import { DoodleContainer, HeaderContainer } from './header.styled'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
 import Search from './Search'
+import Settings from './Settings'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -59,6 +60,7 @@ const Header = () => {
       </DoodleContainer>
       <div className="d-flex jsb">
         <Search />
+        <Settings />
       </div>
     </HeaderContainer>
   )

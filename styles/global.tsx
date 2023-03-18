@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
-import { DoodleContainer, SearchInput } from 'components/Header/header.styled'
+import {
+  DoodleContainer,
+  SearchInput,
+  SettingsContainer,
+} from 'components/Header/header.styled'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -92,6 +96,10 @@ const GlobalStyle = createGlobalStyle`
       flex-grow: 1;
     }
 
+    &.f-wrap {
+      flex-wrap: wrap;
+    }
+
   }
 
   .d-in-block {
@@ -124,13 +132,41 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${SearchInput} {
-      height: 34px;
-      border-radius: 16px;
-      background: #fff;
-      margin: 10px 0 0;
-      box-shadow: none;
       border: 1px solid #dfe1e5;
       margin-left: 14px;
+
+      &:hover {
+        border-color: rgba(223,225,229,0);
+        box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+      }
+
+      .search {
+        &__input--container  {
+          padding-top: 0;
+
+          input {
+            padding: 0;
+            margin-top: 0;
+            line-height: 32px;
+            font-size: 14px;
+            height: 32px !important;
+          }
+        }
+
+        &__btn {
+          height: 32px;
+          line-height: 32px;
+
+          .icon, svg {
+            height: 20px;
+            width: 20px;
+          }
+        }
+      }
+    }
+
+    ${SettingsContainer} {
+      margin-top: 6px;
     }
   }
 

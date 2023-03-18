@@ -10,7 +10,6 @@ import Instagram from 'assets/icons/instagram.svg'
 import Twitter from 'assets/icons/twitter.svg'
 import LinkedIn from 'assets/icons/linkedin.svg'
 
-
 const Constants = {
   Nav: [
     {
@@ -59,6 +58,9 @@ const Constants = {
   Api: {
     Resume:
       'https://wy7uubmcz4.execute-api.ap-south-1.amazonaws.com/default/dresume',
+  },
+  Assets: {
+    SettingsProfileAvatar: 'https://media.graphassets.com/y7xaSQo5TOybeo6PVmAG',
   },
 }
 

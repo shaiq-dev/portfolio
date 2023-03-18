@@ -55,13 +55,37 @@ export const SearchInput = styled.div`
   box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
   border-radius: 24px;
   margin: 0 auto;
-  width: 540px;
+  /* width: 540px; */
+  width: 692px;
   margin-left: 16px;
+
+  &:hover {
+    box-shadow: 0 2px 8px 1px rgb(64 60 67 / 24%);
+    border-color: rgba(223, 225, 229, 0);
+  }
 
   .search {
     &__input--container {
-      flex: 1;
-      padding: 5px 4px 0 14px;
+      padding: 5px 4px 0 20px;
+
+      input {
+        font: 16px arial, sans-serif;
+        font-size: 16px;
+        flex: 100%;
+        line-height: 39px;
+        height: 39px !important;
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        padding: 0 0 3px;
+        color: rgba(0, 0, 0, 0.87);
+        word-wrap: break-word;
+        outline: 0;
+        display: flex;
+        -webkit-tap-highlight-color: transparent;
+        box-sizing: content-box;
+        margin-top: -3px;
+      }
     }
 
     &__btn {
@@ -73,6 +97,46 @@ export const SearchInput = styled.div`
       background: transparent;
       border: none;
       cursor: pointer;
+
+      .icon {
+        background: none;
+        color: #4285f4;
+        height: 24px;
+        width: 24px;
+        margin: auto;
+
+        svg {
+          fill: currentColor;
+        }
+      }
     }
+  }
+`
+export const SettingsContainer = styled.div`
+  z-index: 3;
+  padding-right: 24px;
+`
+export const SettingsProfileContainer = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  padding: 4px;
+  border-radius: 50%;
+  height: 40px;
+
+  &:hover {
+    background-color: rgba(60, 64, 67, 0.08);
+    cursor: pointer;
+  }
+
+  img {
+    background-size: 32px 32px;
+    border: 0;
+    border-radius: 50%;
+    display: block;
+    margin: 0px;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    z-index: 0;
   }
 `
