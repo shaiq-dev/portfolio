@@ -32,7 +32,7 @@ export const updateCommitCount = async (count) => {
         }
     `
 
-  const updateConfiguration = await _requestHygraph(updateQuery)
+  const { updateConfiguration } = await _requestHygraph(updateQuery)
 
   if (!updateConfiguration.id) {
     console.error('Error updating commit count')
@@ -50,7 +50,7 @@ export const updateCommitCount = async (count) => {
         }
     `
 
-  const publishConfiguration = await _requestHygraph(publishQuery)
+  const { publishConfiguration } = await _requestHygraph(publishQuery)
 
   if (!publishConfiguration.id) {
     console.error('Error publishing commit count')
