@@ -132,8 +132,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${SearchInput} {
+      height: 34px;
+      border-radius: 16px;
+      background: #fff;
+      margin: 10px 0 0 14px;
+      box-shadow: none;
       border: 1px solid #dfe1e5;
-      margin-left: 14px;
+      /* margin-left: 14px; */
 
       &:hover {
         border-color: rgba(223,225,229,0);
