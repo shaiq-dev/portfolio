@@ -3,8 +3,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import classnames from 'classnames'
 
-import { DoodleContainer, HeaderContainer } from './header.styled'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
+import { DoodleBackgroud, DoodleContainer, HeaderContainer } from './_styled'
 import Search from './Search'
 import Settings from './Settings'
 
@@ -53,12 +53,12 @@ const Header = () => {
 
   return (
     <HeaderContainer ref={ref} className={attachedClasses}>
-      <DoodleContainer className="doodle">
-        <div className="doodle__bg">
+      <DoodleContainer>
+        <DoodleBackgroud>
           <img src="/img/bg.png" alt="Google" width="100%" height={138} />
-        </div>
+        </DoodleBackgroud>
       </DoodleContainer>
-      <div className="d-flex jsb">
+      <div className="d-flex justify-between">
         <Search />
         <Settings />
       </div>

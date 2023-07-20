@@ -21,11 +21,11 @@ const PostItem = ({
   return (
     <LatestPostsItem className="item">
       <div className="item__container">
-        <div className="d-flex flex-column f-grow-1">
+        <div className="d-flex flex-column flex-grow-1">
           <div className="item__wrapper">
             <a
               href={link}
-              className="d-flex flex-column f-grow-1"
+              className="d-flex flex-column flex-grow-1"
               target="_blank"
               rel="noreferrer"
             >
@@ -129,7 +129,10 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
           <div>
             {showControls.next && (
               <div className="latest-posts__carousel--control">
-                <button className="d-flex ac jc" onClick={nextFrame}>
+                <button
+                  className="d-flex items-center justify-center"
+                  onClick={nextFrame}
+                >
                   <HiChevronRight size={16} strokeWidth={1.8} />
                 </button>
               </div>
@@ -138,7 +141,10 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
           <div>
             {showControls.prev && (
               <div className="latest-posts__carousel--control left">
-                <button className="d-flex ac jc" onClick={prevFrame}>
+                <button
+                  className="d-flex items-center justify-center"
+                  onClick={prevFrame}
+                >
                   <HiChevronLeft size={16} strokeWidth={1.8} />
                 </button>
               </div>

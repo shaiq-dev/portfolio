@@ -1,12 +1,20 @@
 import Image from 'next/image'
 
-import { SearchContainer, SearchInput } from './header.styled'
+import {
+  SearchButton,
+  SearchContainer,
+  SearchInputContainer,
+  SearchInputWrapper,
+  SearchLogo,
+} from './_styled'
 import SearchIcon from 'assets/icons/search.svg'
 
 const Search = () => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {}
+
   return (
     <SearchContainer className="search">
-      <div className="search__logo">
+      <SearchLogo>
         <Image
           src="/img/logo.png"
           alt="Google"
@@ -14,19 +22,19 @@ const Search = () => {
           height={33}
           priority
         />
-      </div>
-      <SearchInput>
-        <div className="search__input--container d-flex f-1">
-          <div className="d-flex f-1 f-wrap">
-            <input type="text" value="Shaiq Kar" />
+      </SearchLogo>
+      <SearchInputContainer>
+        <SearchInputWrapper>
+          <div className="d-flex flex-1 flex-wrap">
+            <input type="text" value="Shaiq Kar" onChange={handleInput} />
           </div>
-        </div>
-        <button className="search__btn">
+        </SearchInputWrapper>
+        <SearchButton>
           <div className="icon">
             <SearchIcon />
           </div>
-        </button>
-      </SearchInput>
+        </SearchButton>
+      </SearchInputContainer>
     </SearchContainer>
   )
 }

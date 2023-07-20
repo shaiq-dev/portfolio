@@ -1,10 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
 
 import {
+  DoodleBackgroud,
   DoodleContainer,
-  SearchInput,
+  SearchButton,
+  SearchInputContainer,
+  SearchInputWrapper,
   SettingsContainer,
-} from 'components/Header/header.styled'
+} from 'components/Header/_styled'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -20,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     --r-margin: 60px;
     --r-width: 369px;
 
-    --blue: #1a0dab;
+    --blue-1: #1a0dab;
     --blue-2: #1a73e8;
     --gray-1: #dadce0;
     --gray-2: #70757a;
@@ -45,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: rgba(0,0,0,.1);
 
     &.link {
-      color: var(--blue);
+      color: var(--blue-1);
 
       &:hover {
         text-decoration: underline;
@@ -67,6 +70,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+
   /* Utility classes */
 
   .d-flex {
@@ -76,27 +84,27 @@ const GlobalStyle = createGlobalStyle`
       flex-direction: column;
     }
     
-    &.jc {
+    &.justify-center {
       justify-content: center;
     }
 
-    &.jsb {
+    &.justify-between {
       justify-content: space-between;
     }
 
-    &.ac {
+    &.items-center {
       align-items: center;
     }
 
-    &.f-1 {
+    &.flex-1 {
       flex: 1;
     }
 
-    &.f-grow-1 {
+    &.flex-grow-1 {
       flex-grow: 1;
     }
 
-    &.f-wrap {
+    &.flex-wrap {
       flex-wrap: wrap;
     }
 
@@ -125,13 +133,13 @@ const GlobalStyle = createGlobalStyle`
       overflow: hidden;
       background: #fff;
       box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-
-      .bg {
-        opacity: 0;
-      }
     }
 
-    ${SearchInput} {
+    ${DoodleBackgroud} {
+        opacity: 0;
+    }
+
+    ${SearchInputContainer} {
       height: 34px;
       border-radius: 16px;
       background: #fff;
@@ -144,31 +152,30 @@ const GlobalStyle = createGlobalStyle`
         border-color: rgba(223,225,229,0);
         box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
       }
+    }
 
-      .search {
-        &__input--container  {
-          padding-top: 0;
+    ${SearchInputWrapper} {
+      padding-top: 0;
 
-          input {
-            padding: 0;
-            margin-top: 0;
-            line-height: 32px;
-            font-size: 14px;
-            height: 32px !important;
-          }
-        }
-
-        &__btn {
-          height: 32px;
-          line-height: 32px;
-
-          .icon, svg {
-            height: 20px;
-            width: 20px;
-          }
-        }
+      input {
+        padding: 0;
+        margin-top: 0;
+        line-height: 32px;
+        font-size: 14px;
+        height: 32px !important;
       }
     }
+
+    ${SearchButton} {
+      height: 32px;
+      line-height: 32px;
+
+      .icon, svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+
 
     ${SettingsContainer} {
       margin-top: 6px;

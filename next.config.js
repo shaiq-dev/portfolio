@@ -17,6 +17,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    disableStaticImages: true,
   },
   webpack(config) {
     config.module.rules.push({

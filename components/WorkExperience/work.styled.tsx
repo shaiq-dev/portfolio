@@ -21,7 +21,7 @@ export const WorkExpContainer = styled.div`
       margin-bottom: 3px;
       font-size: 20px;
       font-weight: 400;
-      color: var(--blue);
+      color: var(--blue-1);
       padding-top: 5px;
     }
 

@@ -4,7 +4,14 @@ import { HiGlobeAsiaAustralia } from 'react-icons/hi2'
 
 import Constants from 'constants/index'
 
-import { ProfileCardContainer } from './profileCard.styled'
+import {
+  ProfileCardAvatar,
+  ProfileCardBio,
+  ProfileCardContainer,
+  ProfileCardHeader,
+  ProfileCardResume,
+  ProfileCardTitle,
+} from './_styled'
 import Socials from './Socials'
 
 const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
@@ -21,34 +28,34 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
   return (
     <ProfileCardContainer className="profile">
       <div>
-        <div className="profile__header d-flex ac">
-          <div className="profile__header--name d-flex f-1 jsb">
+        <ProfileCardHeader>
+          <ProfileCardTitle>
             <div>
               <h2>Shaiq Kar</h2>
               <span>A Coder</span>
             </div>
             <div></div>
-          </div>
-          <div className="profile__header--avatar d-flex ac">
+          </ProfileCardTitle>
+          <ProfileCardAvatar>
             <div className="img">
               <Image src={avatar} alt="Shaiq" width={119} height={119} />
             </div>
-          </div>
-        </div>
-        <div className="profile__resume d-flex ac">
+          </ProfileCardAvatar>
+        </ProfileCardHeader>
+        <ProfileCardResume>
           <a
             href={resumeLink}
             target="_blank"
             className="link"
             rel="noreferrer"
           >
-            <span className="profile__resume--icon">
+            <span className="icon">
               <HiGlobeAsiaAustralia size={24} />
             </span>
             Download Resume
           </a>
-        </div>
-        <div className="profile__bio">{bio}</div>
+        </ProfileCardResume>
+        <ProfileCardBio>{bio}</ProfileCardBio>
         <Socials />
       </div>
     </ProfileCardContainer>

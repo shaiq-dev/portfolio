@@ -1,31 +1,31 @@
 import Constants from 'constants/index'
 
-import { ProfileCardSocials } from './profileCard.styled'
+import { SocialsProfileList, SocialsProfileListItem } from './_styled'
 
 const Socials = () => {
   return (
-    <ProfileCardSocials className="socials">
-      <div className="socials__heading">Profiles</div>
-      <div className="socials__list d-flex jsb">
+    <div className="profile-card-section">
+      <div className="profile-card-section-title">Profiles</div>
+      <SocialsProfileList>
         {Constants.Profiles.map(({ name, handle, icon: Icon }, index) => {
           return (
-            <div className="socials__item" key={index}>
+            <SocialsProfileListItem key={index}>
               <a
                 href={handle}
-                className="d-flex flex-column ac link"
+                className="d-flex flex-column items-center link"
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="socials__item--icon">
+                <div className="icon">
                   <Icon />
                 </div>
                 <span>{name}</span>
               </a>
-            </div>
+            </SocialsProfileListItem>
           )
         })}
-      </div>
-    </ProfileCardSocials>
+      </SocialsProfileList>
+    </div>
   )
 }
 

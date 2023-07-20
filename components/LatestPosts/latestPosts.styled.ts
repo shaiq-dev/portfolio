@@ -154,7 +154,7 @@ export const LatestPostsItem = styled.div`
         overflow: hidden;
         -webkit-box-orient: vertical;
         white-space: normal;
-        color: var(--blue);
+        color: var(--blue-1);
         font-size: 16px;
         line-height: 24px;
         height: 96px;
