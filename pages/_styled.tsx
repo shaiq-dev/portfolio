@@ -25,3 +25,19 @@ export const HomeContainer = styled.div`
     transition: opacity 0.3s;
   }
 `
+
+export const HomeCenterColumn = styled.div`
+  width: var(--center-width);
+  position: relative;
+  margin-left: var(--center-abs-margin);
+  flex: 0 auto;
+`
+
+export const HomeRightColumn = styled.div`
+  margin-left: var(--r-margin);
+  flex: 0 auto;
+  width: 369px;
+  position: relative;
+  padding-bottom: 15px;
+  transition: opacity 0.3s;
+`

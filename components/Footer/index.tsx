@@ -1,23 +1,29 @@
-import { FooterContainer } from './footer.styled'
+import {
+  FooterContainer,
+  FooterCopyright,
+  FooterSection,
+  FooterSectionContent,
+  FooterWrapper,
+} from './_styled'
 
 const Footer = () => {
   return (
-    <FooterContainer className="footer">
-      <div className="footer__wrapper">
-        <div className="footer__bar">
-          <div className="footer__bar--content">
+    <FooterContainer>
+      <FooterWrapper>
+        <FooterSection>
+          <FooterSectionContent>
             <span>India</span>
-            <div className="footer__bar--copyright">
+            <FooterCopyright>
               <span>© {new Date().getFullYear()} - Shaiq Kar</span>
-            </div>
-          </div>
-        </div>
-        <div className="footer__bar secondary">
-          <div className="footer__bar--content">
+            </FooterCopyright>
+          </FooterSectionContent>
+        </FooterSection>
+        <FooterSection $noBorder>
+          <FooterSectionContent>
             Google and the Google logo are registered trademarks of Google LLC.
-          </div>
-        </div>
-      </div>
+          </FooterSectionContent>
+        </FooterSection>
+      </FooterWrapper>
     </FooterContainer>
   )
 }

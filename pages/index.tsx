@@ -6,7 +6,7 @@ import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import { xTimeAgo } from 'utils/index'
-import { HomeContainer } from 'styles/home.styled'
+import { HomeCenterColumn, HomeContainer, HomeRightColumn } from './_styled'
 
 type Props = {
   workExperience: Experience
@@ -27,13 +27,13 @@ export default function Home({
     <>
       <AppBar commits={commits} />
       <HomeContainer>
-        <div className="center">
+        <HomeCenterColumn>
           <WorkExperience data={workExperience} />
           <LatestPosts posts={posts} />
-        </div>
-        <div className="right">
+        </HomeCenterColumn>
+        <HomeRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
-        </div>
+        </HomeRightColumn>
       </HomeContainer>
       <div style={{ height: '1500px', background: '#fff' }}></div>
     </>

@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     --gray-2: #70757a;
     --gray-3: #4d5156;
     --bg-primary: #fff;
+    --bg-secondary: #f2f2f2;
     --text-heading: #202124;
 
     --font-heading: Google Sans, arial, sans-serif;

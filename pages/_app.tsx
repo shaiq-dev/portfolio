@@ -2,15 +2,15 @@ import type { AppProps } from 'next/app'
 import { Analytics } from '@vercel/analytics/react'
 
 import GlobalStyle from 'styles/global'
-import HomeLayout from 'layout/index'
+import MainLayout from 'layouts/index'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <HomeLayout>
+      <MainLayout>
         <Component {...pageProps} />
-      </HomeLayout>
+      </MainLayout>
       <Analytics />
     </>
   )

@@ -36,6 +36,10 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
+          <meta
+            name="google-site-verification"
+            content="ouDVbST3T8-LW94heAgxjwU_cY7m60Qr3z3vkxt7sSU"
+          />
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/mortezaom/google-sans-cdn@master/fonts.css"
