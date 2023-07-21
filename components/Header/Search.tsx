@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useState } from 'react'
 
 import {
   SearchButton,
@@ -10,7 +11,11 @@ import {
 import SearchIcon from 'assets/icons/search.svg'
 
 const Search = () => {
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {}
+  const [value, setValue] = useState('Shaiq Kar')
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+  }
 
   return (
     <SearchContainer className="search">
@@ -26,7 +31,7 @@ const Search = () => {
       <SearchInputContainer>
         <SearchInputWrapper>
           <div className="d-flex flex-1 flex-wrap">
-            <input type="text" value="Shaiq Kar" onChange={handleInput} />
+            <input type="text" value={value} onChange={handleInput} />
           </div>
         </SearchInputWrapper>
         <SearchButton>

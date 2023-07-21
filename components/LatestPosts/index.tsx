@@ -30,8 +30,6 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
     if (carousel.current.scrollLeft < maxScroll.current) {
       setFrame(frame + 1)
     }
-
-    const x = carousel.current.offsetWidth * frame
   }
 
   const prevFrame = () => {

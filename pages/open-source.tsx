@@ -1,8 +1,5 @@
 import { OpenSourceContainer } from 'styles/open-source.styled'
 
-// import ProjectsAnim from 'assets/img/projects.gif'
-import Image from 'next/image'
-
 export default function OpenSource() {
   return (
     <>
