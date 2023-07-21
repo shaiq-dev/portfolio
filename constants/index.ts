@@ -64,4 +64,14 @@ const Constants = {
   },
 }
 
+export const AppStrings = {
+  ERROR_PAGE_DISPLAY_NAME: 'ErrorPage',
+}
+
+export const GoogleLogos = {
+  x1: '//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png',
+  x2: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png',
+  robot: '//www.google.com/images/errors/robot.png',
+}
+
 export default Constants

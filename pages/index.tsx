@@ -6,7 +6,11 @@ import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import { xTimeAgo } from 'utils/index'
-import { HomeCenterColumn, HomeContainer, HomeRightColumn } from './_styled'
+import {
+  HomeCenterColumn,
+  HomeContainer,
+  HomeRightColumn,
+} from 'styles/_pages.styled'
 
 type Props = {
   workExperience: Experience
