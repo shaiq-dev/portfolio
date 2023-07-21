@@ -21,4 +21,6 @@ export const xTimeAgo = (date: Date) => {
       return `${interval} ${unit.name}${interval > 1 ? 's' : ''} ago`
     }
   }
+
+  return 'Not Available'
 }
