@@ -158,6 +158,8 @@ export const SearchButton = styled.button`
 `
 
 export const SettingsContainer = styled.div`
+  display: flex;
+  align-items: center;
   z-index: 3;
   padding-right: 24px;
 `

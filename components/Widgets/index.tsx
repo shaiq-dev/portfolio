@@ -1,4 +1,4 @@
-import { AppBarContainer } from './widgets.styled'
+import { AppBarContainer } from './_styled'
 
 type AppBarProps = {
   commits: number

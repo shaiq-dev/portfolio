@@ -118,6 +118,13 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
+  .h {
+    &-full {
+      height: 100%;
+    }
+  }
+
+
   /* Header Sticky Styles */
 
   .header-sticky {
@@ -136,7 +143,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ${DoodleBackgroud} {
-        opacity: 0;
+      opacity: 0;
     }
 
     ${SearchInputContainer} {

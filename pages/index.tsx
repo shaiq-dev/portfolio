@@ -88,7 +88,7 @@ export const getServerSideProps = async () => {
         categories,
       }
     })
-    return posts
+    return [...posts, ...posts, ...posts]
   }
 
   const { workExperiences } = await gqlClient.request(queryFetchWorkExp)

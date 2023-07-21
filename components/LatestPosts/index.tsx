@@ -3,60 +3,24 @@ import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi2'
 
-import { LatestPostsContainer, LatestPostsItem } from './latestPosts.styled'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
-import { MediumShortPost } from '../../types'
+import { MediumShortPost } from 'types/index'
+import {
+  Carousel,
+  CarouselButton,
+  CarouselControl,
+  CarouselRig,
+  LatestPostsTitle,
+} from './_styled'
+import PostItem from './PostItem'
 
 gsap.registerPlugin(ScrollToPlugin)
-
-type PostItemProps = MediumShortPost
-
-const PostItem = ({
-  title,
-  link,
-  thumbnail,
-  pubDate,
-  categories,
-}: PostItemProps) => {
-  return (
-    <LatestPostsItem className="item">
-      <div className="item__container">
-        <div className="d-flex flex-column flex-grow-1">
-          <div className="item__wrapper">
-            <a
-              href={link}
-              className="d-flex flex-column flex-grow-1"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="item__image">
-                <img src={thumbnail} alt="Post Image" />
-              </div>
-              <div className="item__content">
-                <div className="item__content--tags">
-                  {categories.map((tag, index) => (
-                    <span key={index}>#{tag} </span>
-                  ))}
-                </div>
-                <div className="item__content--title">{title}</div>
-                <div className="item__content--time">{pubDate}</div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </LatestPostsItem>
-  )
-}
 
 const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
   const maxScroll = useRef(0)
   const carousel = useRef<HTMLDivElement>(null)
   const [frame, setFrame] = useState(0)
-  const [showControls, setShowControls] = useState({
-    prev: false,
-    next: true,
-  })
+  const [maxFrames, setMaxFrames] = useState(-1)
 
   const nextFrame = () => {
     if (!carousel.current) {
@@ -67,10 +31,7 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
       setFrame(frame + 1)
     }
 
-    setShowControls({
-      prev: true,
-      next: carousel.current.scrollLeft < maxScroll.current,
-    })
+    const x = carousel.current.offsetWidth * frame
   }
 
   const prevFrame = () => {
@@ -81,11 +42,18 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
     if (carousel.current.scrollLeft > 0) {
       setFrame(frame - 1)
     }
+  }
 
-    setShowControls({
-      prev: carousel.current.scrollLeft > 0,
-      next: true,
-    })
+  const isControlHidden = (direction: 'prev' | 'next') => {
+    if (direction === 'prev') {
+      return frame <= 0
+    }
+
+    if (direction === 'next' && carousel.current !== null) {
+      return carousel.current.offsetWidth * frame >= maxScroll.current
+    }
+
+    return false
   }
 
   useIsomorphicLayoutEffect(() => {
@@ -94,66 +62,70 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
     }
     maxScroll.current =
       carousel.current.scrollWidth - carousel.current.offsetWidth
+
+    setMaxFrames(
+      Math.floor(carousel.current.scrollWidth / carousel.current.offsetWidth) -
+        1
+    )
   }, [])
 
   useIsomorphicLayoutEffect(() => {
     if (!carousel.current) {
       return
     }
+
+    const xPose = carousel.current.offsetWidth * frame
+
+    console.log({ frame, maxFrames })
+
     gsap.to(carousel.current, {
       duration: 0.5,
       scrollTo: {
-        x: carousel.current.offsetWidth * frame,
+        x: xPose + (frame === maxFrames ? 16 : 0),
         autoKill: false,
       },
     })
   }, [frame])
 
   return (
-    <LatestPostsContainer className="latest-posts">
-      <div className="latest-posts__heading d-flex flex-column">
+    <div>
+      <LatestPostsTitle>
         <h2>Latest Posts</h2>
         <div>I write on Medium</div>
-      </div>
+      </LatestPostsTitle>
       <div>
-        <div className="latest-posts__carousel">
-          <div className="latest-posts__carousel--rig" ref={carousel}>
+        <Carousel>
+          <CarouselRig ref={carousel}>
             <div className="d-in-block overflow-hidden">
-              <div className="d-flex latest-posts__carousel--scroller">
+              <div className="d-flex">
                 {posts.map((item, index) => (
                   <PostItem key={index} {...item} />
                 ))}
               </div>
             </div>
-          </div>
+          </CarouselRig>
           <div>
-            {showControls.next && (
-              <div className="latest-posts__carousel--control">
-                <button
-                  className="d-flex items-center justify-center"
-                  onClick={nextFrame}
-                >
+            {!isControlHidden('next') && (
+              <CarouselControl>
+                <CarouselButton onClick={nextFrame}>
                   <HiChevronRight size={16} strokeWidth={1.8} />
-                </button>
-              </div>
+                </CarouselButton>
+              </CarouselControl>
             )}
           </div>
           <div>
-            {showControls.prev && (
-              <div className="latest-posts__carousel--control left">
-                <button
-                  className="d-flex items-center justify-center"
-                  onClick={prevFrame}
-                >
+            {!isControlHidden('prev') && (
+              <CarouselControl $left>
+                <CarouselButton onClick={prevFrame}>
                   <HiChevronLeft size={16} strokeWidth={1.8} />
-                </button>
-              </div>
+                </CarouselButton>
+              </CarouselControl>
             )}
           </div>
-        </div>
+        </Carousel>
       </div>
       <hr style={{ paddingTop: 16 }} role="presentation" />
-    </LatestPostsContainer>
+    </div>
   )
 }
 

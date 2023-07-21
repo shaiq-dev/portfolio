@@ -8,28 +8,26 @@ export const TopNavContainer = styled.div`
   margin-top: -21px;
   position: relative;
   z-index: 126;
+`
 
-  .navbar {
-    &__wrapper {
-      background: var(--bg-primary);
-      height: 58px;
-      padding: 0;
-      position: relative;
-      z-index: 126;
-      white-space: nowrap;
+export const TopNavWrapper = styled.div`
+  background: var(--bg-primary);
+  height: 58px;
+  padding: 0;
+  position: relative;
+  z-index: 126;
+  white-space: nowrap;
 
-      nav {
-        position: relative;
-        white-space: nowrap;
-        align-items: baseline;
-        display: flex;
-        box-sizing: content-box;
-      }
-    }
+  nav {
+    position: relative;
+    white-space: nowrap;
+    align-items: baseline;
+    display: flex;
+    box-sizing: content-box;
   }
 `
 
-export const NavLinks = styled.div`
+export const TopNavLinks = styled.div`
   display: inline;
   margin-left: 169px;
   box-sizing: content-box;
@@ -47,7 +45,7 @@ export const NavLinks = styled.div`
   }
 `
 
-export const NavItemContainer = styled.span`
+export const TopNavItemContainer = styled.span`
   span {
     display: inline-block;
     height: 16px;
@@ -60,10 +58,10 @@ export const NavItemContainer = styled.span`
       width: 16px;
     }
   }
+`
 
-  .active-tab {
-    background: var(--blue-2);
-    height: 3px;
-    margin-top: 11px;
-  }
+export const TopNavItemActive = styled.div`
+  background: var(--blue-2);
+  height: 3px;
+  margin-top: 11px;
 `

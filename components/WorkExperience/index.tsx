@@ -1,6 +1,12 @@
 import type { WorkExperience as Experience } from 'types/index'
 
-import { WorkExpContainer } from './work.styled'
+import {
+  WorkExpCompanyPosition,
+  WorkExpCompanyPositionList,
+  WorkExpContainer,
+  WorkExpSubTitle,
+  WorkExpTitle,
+} from './_styled'
 
 const WorkExperience = ({ data }: { data: Experience }) => {
   const getDate = (date: string) => {
@@ -12,26 +18,26 @@ const WorkExperience = ({ data }: { data: Experience }) => {
 
   return (
     <WorkExpContainer className="experience">
-      <span className="experience__sub">Work Experience</span>
+      <WorkExpSubTitle>Work Experience</WorkExpSubTitle>
       {data.map((work) => {
         return (
           <div key={work.id}>
-            <h3 className="experience__heading">{work.company}</h3>
+            <WorkExpTitle>{work.company}</WorkExpTitle>
             <div>{work.description}</div>
-            <div className="experience__list">
+            <WorkExpCompanyPositionList>
               {work.positions.map((position) => {
                 return (
-                  <div key={position.id} className="experience__list--position">
-                    <span className="experience__sub">
+                  <WorkExpCompanyPosition key={position.id}>
+                    <WorkExpSubTitle>
                       {getDate(position.startDate)} ›{' '}
                       {position.endDate ? getDate(position.endDate) : 'Present'}{' '}
-                    </span>
-                    <h3 className="experience__heading">{position.role}</h3>
+                    </WorkExpSubTitle>
+                    <WorkExpTitle as="h3">{position.role}</WorkExpTitle>
                     <div>{position.description}</div>
-                  </div>
+                  </WorkExpCompanyPosition>
                 )
               })}
-            </div>
+            </WorkExpCompanyPositionList>
           </div>
         )
       })}

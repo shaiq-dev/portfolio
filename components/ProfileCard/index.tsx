@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { HiGlobeAsiaAustralia } from 'react-icons/hi2'
 
 import Constants from 'constants/index'
-
 import {
   ProfileCardAvatar,
   ProfileCardBio,

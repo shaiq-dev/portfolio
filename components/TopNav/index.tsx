@@ -3,7 +3,13 @@ import { useRouter } from 'next/router'
 import { IconType } from 'react-icons'
 
 import Constants from 'constants/index'
-import { TopNavContainer, NavLinks, NavItemContainer } from './topNav.styled'
+import {
+  TopNavContainer,
+  TopNavWrapper,
+  TopNavLinks,
+  TopNavItemContainer,
+  TopNavItemActive,
+} from './_styled'
 
 type NavItemProps = {
   lablel: string
@@ -12,15 +18,15 @@ type NavItemProps = {
   icon: any | IconType
 }
 
-const NavItem = ({ lablel, isActive, icon: Icon }: NavItemProps) => {
+const TopNavItem = ({ lablel, isActive, icon: Icon }: NavItemProps) => {
   return (
-    <NavItemContainer>
+    <TopNavItemContainer>
       <span>
         <Icon />
       </span>
       {lablel}
-      {isActive && <div className="active-tab" />}
-    </NavItemContainer>
+      {isActive && <TopNavItemActive />}
+    </TopNavItemContainer>
   )
 }
 
@@ -28,24 +34,24 @@ const TopNav = () => {
   const router = useRouter()
 
   return (
-    <TopNavContainer className="navbar">
-      <div className="navbar__wrapper">
+    <TopNavContainer>
+      <TopNavWrapper>
         <nav>
           <div>
-            <NavLinks>
+            <TopNavLinks>
               {Constants.Nav.map(({ name, path, icon }, index) => (
                 <NavLink href={path} key={index}>
-                  <NavItem
+                  <TopNavItem
                     lablel={name}
                     isActive={router.pathname === path}
                     icon={icon}
                   />
                 </NavLink>
               ))}
-            </NavLinks>
+            </TopNavLinks>
           </div>
         </nav>
-      </div>
+      </TopNavWrapper>
     </TopNavContainer>
   )
 }

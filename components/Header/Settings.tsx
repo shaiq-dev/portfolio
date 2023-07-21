@@ -3,7 +3,7 @@ import { SettingsContainer, SettingsProfileContainer } from './_styled'
 
 const Settings = () => {
   return (
-    <SettingsContainer className="settings d-flex items-center">
+    <SettingsContainer>
       <SettingsProfileContainer>
         <div>
           <img src={Constants.Assets.SettingsProfileAvatar} />
