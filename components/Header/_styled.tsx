@@ -59,54 +59,6 @@ export const SearchInputContainer = styled.div`
     box-shadow: 0 2px 8px 1px rgb(64 60 67 / 24%);
     border-color: rgba(223, 225, 229, 0);
   }
-
-  .search {
-    /* &__input--container {
-      padding: 5px 4px 0 20px;
-
-      input {
-        font: 16px arial, sans-serif;
-        font-size: 16px;
-        flex: 100%;
-        line-height: 39px;
-        height: 39px !important;
-        background-color: transparent;
-        border: none;
-        margin: 0;
-        padding: 0 0 3px;
-        color: rgba(0, 0, 0, 0.87);
-        word-wrap: break-word;
-        outline: 0;
-        display: flex;
-        -webkit-tap-highlight-color: transparent;
-        box-sizing: content-box;
-        margin-top: -3px;
-      }
-    } */
-
-    /* &__btn {
-      flex: 0 0 auto;
-      padding-right: 13px;
-      outline: 0;
-      height: 44px;
-      width: 44px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-
-      .icon {
-        background: none;
-        color: #4285f4;
-        height: 24px;
-        width: 24px;
-        margin: auto;
-
-        svg {
-          fill: currentColor;
-        }
-      }
-    } */
-  }
 `
 
 export const SearchInputWrapper = styled.div`
