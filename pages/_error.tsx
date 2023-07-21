@@ -18,7 +18,7 @@ const ErrorPage = ({ statusCode }: ErrorPageProps) => {
         <ErrorPageLogo />
       </NextLink>
       <p>
-        <b>${statusCode}.</b> <ins>That&rsquo;s an error.</ins>
+        <b>{statusCode}.</b> <ins>That&rsquo;s an error.</ins>
       </p>
       {statusCode === 404 ? (
         <p>
