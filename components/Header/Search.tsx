@@ -9,6 +9,7 @@ import {
   SearchLogo,
 } from './_styled'
 import SearchIcon from 'assets/icons/search.svg'
+import Tooltip from 'components/Tooltip'
 
 const Search = () => {
   const [value, setValue] = useState('Shaiq Kar')
@@ -34,11 +35,14 @@ const Search = () => {
             <input type="text" value={value} onChange={handleInput} />
           </div>
         </SearchInputWrapper>
-        <SearchButton>
-          <div className="icon">
-            <SearchIcon />
-          </div>
-        </SearchButton>
+
+        <Tooltip text="Search">
+          <SearchButton>
+            <div className="icon">
+              <SearchIcon />
+            </div>
+          </SearchButton>
+        </Tooltip>
       </SearchInputContainer>
     </SearchContainer>
   )

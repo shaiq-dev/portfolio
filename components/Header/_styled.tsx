@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   width: 100%;
   height: 46px;
   margin-top: 6px;
-  z-index: 128;
+  z-index: 50;
 `
 
 export const DoodleContainer = styled.div`
