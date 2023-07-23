@@ -14,7 +14,7 @@ export const TooltipContainer = styled.div`
   text-align: center;
   white-space: nowrap;
   visibility: visible;
-  z-index: 100;
+  z-index: 9999;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px;
   transition: opacity 0.13s ease 0s;
 `
