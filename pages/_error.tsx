@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { AppStrings } from 'constants/index'
 import { ErrorPageLogo } from 'styles/_pages.styled'
+import Head from 'next/head'
 
 interface ErrorPageProps {
   statusCode: number
@@ -14,6 +15,9 @@ const ErrorPage = ({ statusCode }: ErrorPageProps) => {
 
   return (
     <>
+      <Head>
+        <title>Error 404 (Not Found)!!1</title>
+      </Head>
       <NextLink href="/">
         <ErrorPageLogo />
       </NextLink>
