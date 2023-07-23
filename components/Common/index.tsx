@@ -24,5 +24,5 @@ export const RenderIf = ({
   children,
   isTrue,
 }: React.PropsWithChildren<{ isTrue: boolean }>) => {
-  return isTrue ? children : null
+  return isTrue ? <>{children}</> : <></>
 }
