@@ -44,7 +44,7 @@ export default function Home({
   )
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const gqlClient = new GraphQLClient(
     process.env.HYGRAPH_READONLY_API as string
   )

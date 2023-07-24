@@ -4,6 +4,7 @@ import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 
 import { updateCommitCount } from './hygraph.js'
+import { startNewBuild } from './vercel.js'
 
 const GIT_TOKEN = process.env.GIT_TOKEN
 const GIT_USER = process.env.GIT_USER
@@ -108,4 +109,12 @@ console.log(`Total ${allContributions} 💪 made so far`)
  * The total can be stored anywhere now. I am using hygraph as a
  * headless CMS for this project, so i will be storing it there.
  */
-updateCommitCount(allContributions)
+updateCommitCount(allContributions).then(async () => {
+  /**
+   * The website use next js `getStaticProps` which caches the props at
+   * build time, so to reflect the new commits a new build is required.
+   * This is better than `getServerSideProps` which increase the page
+   * load time.
+   */
+  await startNewBuild()
+})
