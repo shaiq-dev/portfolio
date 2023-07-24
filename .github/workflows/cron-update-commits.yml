@@ -29,6 +29,7 @@ jobs:
           GIT_USER: ${{ secrets.GIT_USER }}
           HYGRAPH_ENDPOINT: ${{ secrets.HYGRAPH_ENDPOINT }}
           HYGRAPH_TOKEN: ${{ secrets.HYGRAPH_TOKEN }}
+          VERCEL_DEPLOYMENT_HOOK: ${{ secrets.VERCEL_DEPLOYMENT_HOOK }}
         run: |
           env \
             ACTIVE_CONFIG_VERSION=$ACTIVE_CONFIG_VERSION \
@@ -39,4 +40,5 @@ jobs:
             GIT_USER=$GIT_USER \
             HYGRAPH_ENDPOINT=$HYGRAPH_ENDPOINT \
             HYGRAPH_TOKEN=$HYGRAPH_TOKEN \
+            VERCEL_DEPLOYMENT_HOOK \
             node --no-warnings commits.js
