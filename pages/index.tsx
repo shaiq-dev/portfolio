@@ -1,3 +1,4 @@
+import { kv } from '@vercel/kv'
 import { GraphQLClient, gql } from 'graphql-request'
 
 import { AppBar } from 'components/Widgets'
@@ -6,13 +7,14 @@ import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import { xTimeAgo } from 'utils/index'
+import { AppContants, VercelKVKeys } from 'constants/index'
 import {
   HomeCenterColumn,
   HomeContainer,
   HomeRightColumn,
 } from 'styles/_pages.styled'
 
-type Props = {
+type HomePageProps = {
   workExperience: Experience
   commits: number
   avatar: string
@@ -26,7 +28,7 @@ export default function Home({
   avatar,
   bio,
   posts,
-}: Props) {
+}: HomePageProps) {
   return (
     <>
       <AppBar commits={commits} />
@@ -45,6 +47,14 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
+  const cachedData = await kv.get<HomePageProps>(
+    VercelKVKeys.HOME_PAGE_STATIC_PROPS
+  )
+
+  if (cachedData) {
+    return { props: cachedData }
+  }
+
   const gqlClient = new GraphQLClient(
     process.env.HYGRAPH_READONLY_API as string
   )
@@ -100,13 +110,19 @@ export const getStaticProps = async () => {
 
   const { commitCount, profileBio, profileCardAvatar } = configurations[0]
 
+  const props: HomePageProps = {
+    workExperience: workExperiences,
+    commits: commitCount,
+    avatar: profileCardAvatar.url,
+    bio: profileBio,
+    posts: await _getMediumPosts(),
+  }
+
+  await kv.set(VercelKVKeys.HOME_PAGE_STATIC_PROPS, props, {
+    ex: AppContants.REDIS_TTL,
+  })
+
   return {
-    props: {
-      workExperience: workExperiences,
-      commits: commitCount,
-      avatar: profileCardAvatar.url,
-      bio: profileBio,
-      posts: await _getMediumPosts(),
-    },
+    props,
   }
 }
