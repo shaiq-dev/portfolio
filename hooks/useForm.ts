@@ -11,9 +11,12 @@ type FormValidators<T> = {
 
 type FormErrors<T> = { [K in keyof T]?: string }
 
+type FormInputFocus<T> = { [K in keyof T]?: boolean }
+
 type FormHandlers = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
+  handleFocus: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
 type FormGetInputProps<T> = <K extends keyof T>(
@@ -23,6 +26,8 @@ type FormGetInputProps<T> = <K extends keyof T>(
   value: T[K]
   onChange: FormHandlers['handleChange']
   onBlur: FormHandlers['handleBlur']
+  onFocus: FormHandlers['handleFocus']
+  focused: boolean
   error: string | undefined
 }
 
@@ -56,6 +61,7 @@ export const useForm = <T extends Record<string, unknown>>({
 }): UseFormReturnType<T> => {
   const [values, setValues] = useState<T>(initialValues)
   const [errors, setErrors] = useState<FormErrors<T>>({})
+  const [isFocused, setIsFocused] = useState<FormInputFocus<T>>({})
 
   const handleChange: FormHandlers['handleChange'] = (e) => {
     const { name, value } = e.target
@@ -71,10 +77,17 @@ export const useForm = <T extends Record<string, unknown>>({
   const handleBlur: FormHandlers['handleBlur'] = (e) => {
     const { name, value } = e.target
 
+    setIsFocused((prev) => ({ ...prev, [name]: false }))
+
     if (validators[name]) {
       const error = validators[name]?.(value as T[string])
       setErrors((prev) => ({ ...prev, [name]: error }))
     }
+  }
+
+  const handleFocus: FormHandlers['handleFocus'] = (e) => {
+    const { name } = e.target
+    setIsFocused((prev) => ({ ...prev, [name]: true }))
   }
 
   const onSubmit = (callback: (values: T) => void) => (e: React.FormEvent) => {
@@ -98,6 +111,8 @@ export const useForm = <T extends Record<string, unknown>>({
     value: values[name],
     onChange: handleChange,
     onBlur: handleBlur,
+    onFocus: handleFocus,
+    focused: isFocused[name] || false,
     error: errors[name] || undefined,
   })
 
