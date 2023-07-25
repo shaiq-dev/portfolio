@@ -66,12 +66,25 @@ const Constants = {
 
 export const AppStrings = {
   ERROR_PAGE_DISPLAY_NAME: 'ErrorPage',
+  CONNECT_PAGE_HEADING: 'Talk to a Google specialist',
+  CONNECT_PAGE_SUB_HEADING: 'Haha! kidding, say hi to me',
+  EMPTY_FIELD_ERROR: 'This is required',
+  INVALID_EMAIL_ERROR: 'Email should be in this format: name@example.com',
 }
 
 export const GoogleLogos = {
   x1: '//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png',
   x2: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png',
   robot: '//www.google.com/images/errors/robot.png',
+}
+
+export const AppContants = {
+  REDIS_TTL: 3600,
+  EMAIL_REGEX: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+}
+
+export const VercelKVKeys = {
+  HOME_PAGE_STATIC_PROPS: 'homepage_static_props',
 }
 
 export default Constants

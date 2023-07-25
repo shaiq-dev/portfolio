@@ -1,3 +1,5 @@
+import { DefaultTheme, ThemedCssFunction } from 'styled-components'
+
 export interface CompanyPosition {
   id: string
   role: string
@@ -20,3 +22,5 @@ export type MediumShortPost = {
   thumbnail: string
   categories: string[]
 }
+
+export type InterpolatedCss = ReturnType<ThemedCssFunction<DefaultTheme>>

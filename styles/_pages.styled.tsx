@@ -31,6 +31,21 @@ export const HomeRightColumn = styled.div`
 
 // Blog Page
 
+// Open-Source Page
+
+// Connect Page
+export const ConnectContainer = styled(HomeContainer)``
+
+export const ConnectCenterColumn = styled(HomeCenterColumn)``
+
+export const ConnectSubHeading = styled.p`
+  font-size: 18px;
+  font-family: var(--font-heading);
+  font-weight: 300;
+  color: var(--gray-2);
+  margin: 24px 0px 36px;
+`
+
 // Error Page
 export const ErrorPageLogo = styled.span`
   background: url(${GoogleLogos.x1}) no-repeat;

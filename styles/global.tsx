@@ -26,9 +26,11 @@ const GlobalStyle = createGlobalStyle`
 
     --blue-1: #1a0dab;
     --blue-2: #1a73e8;
+    --blue-3: #417dff;
     --gray-1: #dadce0;
     --gray-2: #70757a;
     --gray-3: #4d5156;
+    --green-1: #34a853;
     --bg-primary: #fff;
     --bg-secondary: #f2f2f2;
     --text-heading: #202124;
@@ -81,36 +83,36 @@ const GlobalStyle = createGlobalStyle`
 
   .d-flex {
     display: flex;
-
-    &.flex-column {
-      flex-direction: column;
-    }
-    
-    &.justify-center {
-      justify-content: center;
-    }
-
-    &.justify-between {
-      justify-content: space-between;
-    }
-
-    &.items-center {
-      align-items: center;
-    }
-
-    &.flex-1 {
-      flex: 1;
-    }
-
-    &.flex-grow-1 {
-      flex-grow: 1;
-    }
-
-    &.flex-wrap {
-      flex-wrap: wrap;
-    }
-
   }
+
+  &.flex-column {
+    flex-direction: column;
+  }
+  
+  &.justify-center {
+    justify-content: center;
+  }
+
+  &.justify-between {
+    justify-content: space-between;
+  }
+
+  &.items-center {
+    align-items: center;
+  }
+
+  &.flex-1 {
+    flex: 1;
+  }
+
+  &.flex-grow-1 {
+    flex-grow: 1;
+  }
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+
 
   .d-in-block {
     display: inline-block;
