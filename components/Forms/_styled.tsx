@@ -12,13 +12,15 @@ export const InputContainer = styled.div`
   margin-bottom: 24px;
 `
 
-export const InputLabel = styled.div<{ $hasError: boolean }>`
+export const InputLabel = styled.div<{
+  $hasError: boolean
+  $hasFocus: boolean
+}>`
   color: var(--c-text);
   background-color: #fff;
   padding: 0px 5px;
   font-weight: 400;
   font-size: 12px;
-  line-height: 1.4375em;
   letter-spacing: 0.2px;
   display: block;
   white-space: nowrap;
@@ -28,14 +30,15 @@ export const InputLabel = styled.div<{ $hasError: boolean }>`
   position: absolute;
   left: 16px;
   top: -10px;
-  /* transform: translate(14px, -9px) scale(0.75); */
   z-index: 1;
   pointer-events: auto;
   user-select: none;
 
-  &.input-focus {
-    color: #1a73e8;
-  }
+  ${(props) =>
+    props.$hasFocus &&
+    css`
+      color: var(--blue-2);
+    `}
 
   ${(props) =>
     props.$hasError &&
@@ -64,8 +67,20 @@ export const InputField = styled.input<{ $hasError: boolean }>`
     border-color: rgb(32, 33, 36);
   }
 
-  &.input-focus {
-    border: 2px solid #1a73e8;
+  &:focus {
+    border-width: 2px;
+    ${(props) =>
+      props.$hasError
+        ? css`
+            border-color: var(--c-error);
+          `
+        : css`
+            border-color: var(--blue-2);
+          `}
+
+    ${InputLabel} {
+      color: red;
+    }
   }
 
   ${(props) =>

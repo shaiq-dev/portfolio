@@ -1,23 +1,22 @@
-import { useState } from 'react'
 import { InputContainer, InputField, InputLabel, InputError } from './_styled'
-import classNames from 'classnames'
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string
   required?: boolean
   error?: string
+  focused?: boolean
 }
 
-const Input = ({ label, required = true, error, ...props }: InputProps) => {
-  const [isFocused, setIsFocused] = useState(false)
-
-  const focusClass = classNames({
-    'input-focus': isFocused,
-  })
-
+const Input = ({
+  label,
+  required = true,
+  focused = false,
+  error,
+  ...props
+}: InputProps) => {
   return (
     <InputContainer>
-      <InputLabel $hasError={Boolean(error)}>
+      <InputLabel $hasError={Boolean(error)} $hasFocus={focused}>
         {label}
         {required && ' *'}
       </InputLabel>
