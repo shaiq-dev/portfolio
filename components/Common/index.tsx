@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom'
  */
 export const Portal = ({
   children,
-  container = document.body,
+  container = document.getElementById('__next') as HTMLDivElement,
 }: React.PropsWithChildren<{ container?: Element | DocumentFragment }>) => {
   const [domReady, setDomReady] = useState(false)
 
