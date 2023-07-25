@@ -3,8 +3,8 @@ import { throttling } from '@octokit/plugin-throttling'
 import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 
-import { updateCommitCount } from './hygraph.js'
-import { startNewBuild } from './vercel.js'
+import { updateCommitCount } from './lib/hygraph.js'
+import { startNewBuild } from './lib/vercel.js'
 
 const GIT_TOKEN = process.env.GIT_TOKEN
 const GIT_USER = process.env.GIT_USER
