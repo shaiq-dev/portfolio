@@ -1,5 +1,4 @@
 import { kv } from '@vercel/kv'
-import { GraphQLClient, gql } from 'graphql-request'
 
 import { AppBar } from 'components/Widgets'
 import WorkExperience from 'components/WorkExperience'
@@ -8,6 +7,7 @@ import ProfileCard from 'components/ProfileCard'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import { xTimeAgo } from 'utils/index'
 import { AppContants, VercelKVKeys } from 'constants/index'
+import { HygraphService } from 'services/hygraph'
 import {
   HomeCenterColumn,
   HomeContainer,
@@ -55,11 +55,8 @@ export const getStaticProps = async () => {
     return { props: cachedData }
   }
 
-  const gqlClient = new GraphQLClient(
-    process.env.HYGRAPH_READONLY_API as string
-  )
-  const queryFetchWorkExp = gql`
-    query getWorkExperiences {
+  const { workExperiences } = await HygraphService.instance().executeHpcQuery(`
+    {
       workExperiences {
         company
         description
@@ -73,9 +70,9 @@ export const getStaticProps = async () => {
         }
       }
     }
-  `
+  `)
 
-  const queryFetchConfiguration = gql`
+  const { configurations } = await HygraphService.instance().executeHpcQuery(`
     {
       configurations {
         commitCount
@@ -85,7 +82,7 @@ export const getStaticProps = async () => {
         }
       }
     }
-  `
+  `)
 
   const _getMediumPosts = async () => {
     const api = process.env.MEDIUM_FEED_API as string
@@ -104,9 +101,6 @@ export const getStaticProps = async () => {
     })
     return [...posts, ...posts, ...posts]
   }
-
-  const { workExperiences } = await gqlClient.request(queryFetchWorkExp)
-  const { configurations } = await gqlClient.request(queryFetchConfiguration)
 
   const { commitCount, profileBio, profileCardAvatar } = configurations[0]
 
