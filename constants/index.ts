@@ -68,6 +68,13 @@ export const AppStrings = {
   ERROR_PAGE_DISPLAY_NAME: 'ErrorPage',
   CONNECT_PAGE_HEADING: 'Talk to a Google specialist',
   CONNECT_PAGE_SUB_HEADING: 'Haha! kidding, say hi to me',
+  CONNECT_PAGE_TEXTAREA_PLACEHOLDER:
+    'e.g., I want to modernize my app infrastructure by the end of year.',
+  CONNECT_PAGE_SUCCESS_MESSAGE:
+    'I have received your request keep an eye on you inbox',
+
+  // Errors
+  SERVER_ERROR: 'Something went wrong, try again later!',
   EMPTY_FIELD_ERROR: 'This is required',
   INVALID_EMAIL_ERROR: 'Email should be in this format: name@example.com',
 }
