@@ -48,7 +48,11 @@ export const InputLabel = styled.div<{
 `
 
 export const InputField = styled.input<{ $hasError: boolean }>`
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+  font-family: var(--font-heading);
   font-size: 16px;
+  font-weight: 400;
   letter-spacing: 0.1px;
   line-height: 24px;
   appearance: none;
@@ -77,10 +81,6 @@ export const InputField = styled.input<{ $hasError: boolean }>`
         : css`
             border-color: var(--blue-2);
           `}
-
-    ${InputLabel} {
-      color: red;
-    }
   }
 
   ${(props) =>
@@ -105,6 +105,13 @@ export const InputError = styled.span`
   padding-left: 21px;
 `
 
+// TextArea
+export const TextAreaField = styled(InputField)`
+  height: unset;
+  min-height: 56px;
+  resize: none;
+`
+
 // Button
 export const ButtonContainer = styled.button`
   display: inline-flex;
@@ -125,10 +132,16 @@ export const ButtonContainer = styled.button`
   color: #fff;
   background-color: var(--blue-2);
   outline: 0;
+  gap: 12px;
 
   &:hover {
     border-color: var(--blue-2);
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
       0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `
