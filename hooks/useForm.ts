@@ -14,9 +14,15 @@ type FormErrors<T> = { [K in keyof T]?: string }
 type FormInputFocus<T> = { [K in keyof T]?: boolean }
 
 type FormHandlers = {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
-  handleFocus: (e: React.FocusEvent<HTMLInputElement>) => void
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  handleBlur: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  handleFocus: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
 }
 
 type FormGetInputProps<T> = <K extends keyof T>(
@@ -47,6 +53,10 @@ type UseFormReturnType<T> = {
    * is empty.
    */
   onSubmit: (callback: (values: T) => void) => (e: React.FormEvent) => void
+  /**
+   * Set's a custom error on a field
+   */
+  setFieldError: <K extends keyof T>(name: K, error: string) => void
 }
 
 /**
@@ -90,18 +100,26 @@ export const useForm = <T extends Record<string, unknown>>({
     setIsFocused((prev) => ({ ...prev, [name]: true }))
   }
 
+  const setFieldError = <K extends keyof T>(name: K, error: string) => {
+    setErrors((prev) => ({ ...prev, [name]: error }))
+  }
+
   const onSubmit = (callback: (values: T) => void) => (e: React.FormEvent) => {
     e.preventDefault()
 
     // Validate All Inputs
+    const _errors: Record<string, any> = {}
     Object.entries(values).forEach(([k, v]) => {
       if (validators[k]) {
         const error = validators[k]?.(v as T[string])
-        setErrors((prev) => ({ ...prev, [k]: error }))
+        if (error) {
+          _errors[k] = error
+        }
       }
     })
+    setErrors((prev) => ({ ...prev, ..._errors }))
 
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(_errors).length === 0) {
       callback(values)
     }
   }
@@ -116,5 +134,5 @@ export const useForm = <T extends Record<string, unknown>>({
     error: errors[name] || undefined,
   })
 
-  return { getInputProps, onSubmit, values }
+  return { getInputProps, onSubmit, values, setFieldError }
 }
