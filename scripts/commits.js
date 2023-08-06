@@ -4,7 +4,7 @@ import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 
 import { updateCommitCount } from './lib/hygraph.js'
-import { startNewBuild } from './lib/vercel.js'
+import vercel from './lib/vercel.js'
 
 const GIT_TOKEN = process.env.GIT_TOKEN
 const GIT_USER = process.env.GIT_USER
@@ -116,5 +116,5 @@ updateCommitCount(allContributions).then(async () => {
    * This is better than `getServerSideProps` which increase the page
    * load time.
    */
-  await startNewBuild()
+  await vercel.deploy()
 })
