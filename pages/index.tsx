@@ -99,7 +99,7 @@ export const getStaticProps = async () => {
         categories,
       }
     })
-    return [...posts, ...posts, ...posts]
+    return posts
   }
 
   const { commitCount, profileBio, profileCardAvatar } = configurations[0]
