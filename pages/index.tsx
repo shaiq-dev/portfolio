@@ -1,12 +1,9 @@
-import { kv } from '@vercel/kv'
-
 import { AppBar } from 'components/Widgets'
 import WorkExperience from 'components/WorkExperience'
 import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import { xTimeAgo } from 'utils/index'
-import { AppContants, VercelKVKeys } from 'constants/index'
 import { HygraphService } from 'services/hygraph'
 import {
   HomeCenterColumn,
@@ -47,14 +44,6 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
-  const cachedData = await kv.get<HomePageProps>(
-    VercelKVKeys.HOME_PAGE_STATIC_PROPS
-  )
-
-  if (cachedData) {
-    return { props: cachedData }
-  }
-
   const { workExperiences } = await HygraphService.instance().executeHpcQuery(`
     {
       workExperiences {
@@ -111,10 +100,6 @@ export const getStaticProps = async () => {
     bio: profileBio,
     posts: await _getMediumPosts(),
   }
-
-  await kv.set(VercelKVKeys.HOME_PAGE_STATIC_PROPS, props, {
-    ex: AppContants.REDIS_TTL,
-  })
 
   return {
     props,
