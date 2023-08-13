@@ -56,8 +56,7 @@ const Constants = {
     },
   ],
   Api: {
-    Resume:
-      'https://wy7uubmcz4.execute-api.ap-south-1.amazonaws.com/default/dresume',
+    Resume: 'https://960t3mahl7.execute-api.ap-south-1.amazonaws.com/call/',
   },
   Assets: {
     SettingsProfileAvatar: 'https://media.graphassets.com/y7xaSQo5TOybeo6PVmAG',

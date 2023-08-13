@@ -47,6 +47,7 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
             target="_blank"
             className="link"
             rel="noreferrer"
+            title={resumeLink ? undefined : 'Loading'}
           >
             <span className="icon">
               <HiGlobeAsiaAustralia size={24} />
