@@ -52,7 +52,7 @@ const Accordion = ({
   const [isOpen, setIsOpen] = useState(false)
   const contentRef = useRef<HTMLDivElement | null>(null)
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = () => {
     if (contentRef.current) {
       if (!isOpen) {
         contentRef.current.style.gridTemplateRows = '1fr'

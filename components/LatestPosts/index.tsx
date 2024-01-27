@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi2'
@@ -6,13 +6,13 @@ import { HiChevronRight, HiChevronLeft } from 'react-icons/hi2'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
 import SectionHeader from 'components/Base/SectionHeader'
 import { MediumShortPost } from 'types/index'
+import PostItem from './PostItem'
 import {
   Carousel,
   CarouselButton,
   CarouselControl,
   CarouselRig,
 } from './_styled'
-import PostItem from './PostItem'
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -20,7 +20,6 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
   const maxScroll = useRef(0)
   const carousel = useRef<HTMLDivElement>(null)
   const [frame, setFrame] = useState(0)
-  const [maxFrames, setMaxFrames] = useState(-1)
 
   const nextFrame = () => {
     if (!carousel.current) {
