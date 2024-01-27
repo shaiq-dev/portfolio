@@ -8,6 +8,7 @@
   "author": "Shaiq Kar",
   "license": "ISC",
   "dependencies": {
+    "@vercel/kv": "^1.0.1",
     "octokit": "^2.0.10"
   }
 }

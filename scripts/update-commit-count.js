@@ -2,9 +2,7 @@ import { Octokit } from 'octokit'
 import { throttling } from '@octokit/plugin-throttling'
 import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
-
-import { updateCommitCount } from './lib/hygraph.js'
-import vercel from './lib/vercel.js'
+import { kv } from '@vercel/kv'
 
 const GIT_TOKEN = process.env.GIT_TOKEN
 const GIT_USER = process.env.GIT_USER
@@ -76,7 +74,7 @@ await Promise.all(
 
 console.log("🌳 Got all the branches for all the repos. Let's get the commits")
 
-const allContributions = (
+const commitsCount = (
   await Promise.all(
     Object.entries(repoTree).map(async ([repo, branches]) => {
       const [org, repoName] = repo.split('/')
@@ -96,25 +94,28 @@ const allContributions = (
           return commits.map((commit) => commit.sha)
         })
       )
-      const contributionsCount = new Set(contributions.flat()).size
-      console.log(`${repoName} | ${contributionsCount}`)
-      return contributionsCount
+      const count = new Set(contributions.flat()).size
+      console.log(`${repoName} | ${count}`)
+      return count
     })
   )
 ).reduce((acc, curr) => acc + curr, 0)
 
-console.log(`Total ${allContributions} 💪 made so far`)
+console.log(`Total ${commitsCount} 💪 made so far`)
 
 /**
- * The total can be stored anywhere now. I am using hygraph as a
- * headless CMS for this project, so i will be storing it there.
+ * The total can be stored anywhere. I am using vercel kv database
+ * to store it.
  */
-updateCommitCount(allContributions).then(async () => {
-  /**
-   * The website use next js `getStaticProps` which caches the props at
-   * build time, so to reflect the new commits a new build is required.
-   * This is better than `getServerSideProps` which increase the page
-   * load time.
-   */
-  await vercel.deploy()
-})
+const KV_CONFIG_SET = 'config'
+await kv.hset(KV_CONFIG_SET, { commits: commitsCount })
+
+/**
+ * The website use next js `getStaticProps` which caches the props at
+ * build time, so to reflect the new commits a new build is required.
+ * This is better than `getServerSideProps` which increase the page
+ * load time.
+ */
+const DEPLOY_HOOK = process.env.VERCEL_DEPLOYMENT_HOOK
+await fetch(DEPLOY_HOOK)
+console.log(`[Vercel] New build triggered`)
