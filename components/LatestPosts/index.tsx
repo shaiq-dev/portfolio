@@ -59,11 +59,6 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
     }
     maxScroll.current =
       carousel.current.scrollWidth - carousel.current.offsetWidth
-
-    setMaxFrames(
-      Math.floor(carousel.current.scrollWidth / carousel.current.offsetWidth) -
-        1
-    )
   }, [])
 
   useIsomorphicLayoutEffect(() => {
