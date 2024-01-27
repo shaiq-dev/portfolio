@@ -16,13 +16,13 @@ import Socials from './Socials'
 const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
   const [resumeLink, setResumeLink] = useState('')
 
-  useEffect(() => {
-    fetch(Constants.Api.Resume)
-      .then((res) => res.json())
-      .then((res) => {
-        setResumeLink(res.artifact)
-      })
-  }, [])
+  // useEffect(() => {
+  //   fetch(Constants.Api.Resume)
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setResumeLink(res.artifact)
+  //     })
+  // }, [])
 
   return (
     <ProfileCardContainer className="profile">

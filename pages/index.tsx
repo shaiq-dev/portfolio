@@ -1,10 +1,12 @@
+import { kv } from '@vercel/kv'
+
 import { AppBar } from 'components/Widgets'
 import WorkExperience from 'components/WorkExperience'
 import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
+import PeopleAlsoAsk from 'components/PeopleAlsoAsk'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
-import { xTimeAgo } from 'utils/index'
-import { HygraphService } from 'services/hygraph'
+import HygraphService from 'services/hygraph'
 import {
   HomeCenterColumn,
   HomeContainer,
@@ -33,6 +35,7 @@ export default function Home({
         <HomeCenterColumn>
           <WorkExperience data={workExperience} />
           <LatestPosts posts={posts} />
+          <PeopleAlsoAsk />
         </HomeCenterColumn>
         <HomeRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
@@ -44,7 +47,9 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
-  const { workExperiences } = await HygraphService.instance().executeHpcQuery(`
+  const hygraphService = HygraphService.getInstance()
+
+  const { workExperiences } = await hygraphService.query(`
     {
       workExperiences {
         company
@@ -61,10 +66,9 @@ export const getStaticProps = async () => {
     }
   `)
 
-  const { configurations } = await HygraphService.instance().executeHpcQuery(`
+  const { configurations } = await hygraphService.query(`
     {
       configurations {
-        commitCount
         profileBio
         profileCardAvatar {
           url
@@ -73,32 +77,25 @@ export const getStaticProps = async () => {
     }
   `)
 
-  const _getMediumPosts = async () => {
-    const api = process.env.MEDIUM_FEED_API as string
-    const data = await fetch(api)
-    const feed: { items: MediumShortPost[] } = await data.json()
+  const { profileBio, profileCardAvatar } = configurations[0]
 
-    const posts: MediumShortPost[] = feed.items.map((item) => {
-      const { title, link, pubDate, categories, thumbnail } = item
-      return {
-        title,
-        link,
-        thumbnail,
-        pubDate: xTimeAgo(new Date(pubDate)),
-        categories,
-      }
-    })
-    return posts
+  const commits = (await kv.hget('config', 'commits')) as number
+
+  const latestPostIds: string[] = await kv.zrange('posts:update', 0, 9)
+  latestPostIds.reverse()
+  const postsSet = await kv.hmget('posts', ...latestPostIds)
+
+  if (!postsSet) {
+    throw new Error('Medium posts set failed to load')
   }
-
-  const { commitCount, profileBio, profileCardAvatar } = configurations[0]
+  const posts = Object.values(postsSet) as MediumShortPost[]
 
   const props: HomePageProps = {
     workExperience: workExperiences,
-    commits: commitCount,
+    commits,
     avatar: profileCardAvatar.url,
     bio: profileBio,
-    posts: await _getMediumPosts(),
+    posts,
   }
 
   return {

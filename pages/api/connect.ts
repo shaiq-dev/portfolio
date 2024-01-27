@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 import UaParser from 'ua-parser-js'
 
 import { AppContants, AppStrings } from 'constants/index'
-import { HygraphService } from 'services/hygraph'
+import HygraphService from 'services/hygraph'
 
 /**
  * Types for this route
@@ -90,7 +90,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ sent: false, error: { fieldError }, requestId })
     }
 
-    await HygraphService.instance().create(
+    await HygraphService.getInstance().create(
       'Connect',
       `requestId: "${requestId}", client: "${client}", email: "${email}", message: "${message}", name: "${name}", subject: "${subject}"`
     )
@@ -102,7 +102,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (err) {
     console.error(`[api/connect] ${err}`)
 
-    HygraphService.instance().create(
+    HygraphService.getInstance().create(
       'Connect',
       `requestId: "${requestId}", client: "${client}", errorDump: "${JSON.stringify(
         {

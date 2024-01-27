@@ -1,16 +1,16 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi2'
 
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
+import SectionHeader from 'components/Base/SectionHeader'
 import { MediumShortPost } from 'types/index'
 import {
   Carousel,
   CarouselButton,
   CarouselControl,
   CarouselRig,
-  LatestPostsTitle,
 } from './_styled'
 import PostItem from './PostItem'
 
@@ -48,7 +48,7 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
     }
 
     if (direction === 'next' && carousel.current !== null) {
-      return carousel.current.offsetWidth * frame >= maxScroll.current
+      return (carousel.current.offsetWidth + 12) * frame >= maxScroll.current
     }
 
     return false
@@ -72,25 +72,24 @@ const LatestPosts = ({ posts }: { posts: MediumShortPost[] }) => {
       return
     }
 
-    const xPose = carousel.current.offsetWidth * frame
-
-    console.log({ frame, maxFrames })
-
+    const xPose = (carousel.current.offsetWidth + 12) * frame
+    console.log(xPose)
     gsap.to(carousel.current, {
       duration: 0.5,
       scrollTo: {
-        x: xPose + (frame === maxFrames ? 16 : 0),
+        x: xPose,
         autoKill: false,
       },
     })
   }, [frame])
 
   return (
-    <div>
-      <LatestPostsTitle>
-        <h2>Latest Posts</h2>
-        <div>I write on Medium</div>
-      </LatestPostsTitle>
+    <div className="with-section-gap">
+      <SectionHeader
+        heading="Latest Posts"
+        subHeading="I write on Medium"
+        withBorder={false}
+      />
       <div>
         <Carousel>
           <CarouselRig ref={carousel}>

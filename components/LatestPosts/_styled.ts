@@ -1,25 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const LatestPostsTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 16px 12px;
-  margin: 0 -16px;
-
-  h2 {
-    font-size: 22px;
-    line-height: 28px;
-    display: block;
-  }
-
-  > div {
-    margin-top: 4px;
-    line-height: 20px;
-    font-size: 14px;
-    color: var(--gray-2);
-  }
-`
-
 export const Carousel = styled.div`
   margin: 0 -4px;
   width: auto;

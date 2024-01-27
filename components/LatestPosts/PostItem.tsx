@@ -1,3 +1,4 @@
+import { xTimeAgo } from 'utils/index'
 import { MediumShortPost } from 'types/index'
 import {
   PostItemContainer,
@@ -39,7 +40,7 @@ const PostItem = ({
                   ))}
                 </PostItemTags>
                 <PostItemTitle>{title}</PostItemTitle>
-                <PostItemTime>{pubDate}</PostItemTime>
+                <PostItemTime>{xTimeAgo(new Date(pubDate))}</PostItemTime>
               </PostItemContent>
             </a>
           </PostItemWrapper>

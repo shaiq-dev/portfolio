@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     --center-width: 652px;
     --r-margin: 60px;
     --r-width: 369px;
+    --section-gap: 44px;
 
     --blue-1: #1a0dab;
     --blue-2: #1a73e8;
@@ -127,6 +128,10 @@ const GlobalStyle = createGlobalStyle`
     &-full {
       height: 100%;
     }
+  }
+
+  .with-section-gap {
+    margin-bottom: var(--section-gap);
   }
 
 
