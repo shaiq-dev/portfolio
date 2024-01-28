@@ -2,48 +2,21 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { v4 as uuid } from 'uuid'
 import UaParser from 'ua-parser-js'
 
-import { AppContants, AppStrings } from 'constants/index'
+import { AppStrings } from 'constants/index'
 import HygraphService from 'services/hygraph'
-
-/**
- * Types for this route
- */
+import { isEmail, isEmpty, isValidLength } from 'utils/validators'
 
 type AllowedFields = 'name' | 'email' | 'subject' | 'message'
 
-/**
- * Validation rules for this route
- */
-const ruleFieldCharCount: Record<AllowedFields, [number, number]> = {
+const VALID_FIELD_LENGTH: { [K in AllowedFields]: [number, number] } = {
   name: [3, 64],
+  subject: [8, 256],
+  message: [16, 4056],
   email: [-1, -1],
-  subject: [3, 256],
-  message: [3, 1024],
 }
 
 /**
- * Validation functions for this route
- */
-
-const validateField = (
-  name: AllowedFields,
-  value: string | null | undefined
-) => {
-  if (!value || value.trim() === '') {
-    return AppStrings.EMPTY_FIELD_ERROR
-  }
-
-  const [min, max] = ruleFieldCharCount[name]
-
-  if (value.length < min || value.length > max) {
-    return `This should be ${min} - ${max} characters`
-  }
-
-  return null
-}
-
-/**
- * `[POST]` Api handler for /connect
+ * Api handler for contact messages
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
@@ -55,42 +28,43 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     new UaParser(req.headers['user-agent']).getResult()
   ).replaceAll(`"`, `'`)
 
+  const hygraphService = HygraphService.getInstance()
+
   try {
-    const { body } = req
-    const { name, email, subject, message } = JSON.parse(body)
+    // Validate request body
+    const { name, email, subject, message } = JSON.parse(req.body)
 
-    const fieldError: Record<string, string> = {}
-    Object.entries({ name, email, subject, message }).forEach(
+    const fieldError: { [K in AllowedFields]?: string } = {}
+
+    if (isEmpty(email)) {
+      fieldError['email'] = AppStrings.EMPTY_FIELD_ERROR
+    } else if (!isEmail(email)) {
+      fieldError['email'] = AppStrings.INVALID_EMAIL_ERROR
+    }
+
+    Object.entries({ name, subject, message }).forEach(
       ([k, v]: [string, string]) => {
-        switch (k) {
-          case 'email':
-            {
-              !v || v.trim() === ''
-                ? (fieldError[k] = AppStrings.EMPTY_FIELD_ERROR)
-                : !AppContants.EMAIL_REGEX.test(v) &&
-                  (fieldError[k] = AppStrings.INVALID_EMAIL_ERROR)
-            }
-            break
-
-          default:
-            {
-              const validationError = validateField(k as AllowedFields, v)
-              if (validationError) {
-                fieldError[k] = validationError
-              }
-            }
-            break
+        const field = k as AllowedFields
+        const bounds = VALID_FIELD_LENGTH[field]
+        if (isEmpty(v)) {
+          fieldError[field] = AppStrings.EMPTY_FIELD_ERROR
+        } else if (!isValidLength(v, bounds)) {
+          fieldError[field] = `${k.replace(
+            /^./,
+            k[0].toUpperCase()
+          )} should be ${bounds[0]} - ${bounds[1]} characters`
         }
       }
     )
 
     if (Object.keys(fieldError).length) {
-      return res
-        .status(400)
-        .json({ sent: false, error: { fieldError }, requestId })
+      return res.status(400).json({
+        sent: false,
+        error: { field: fieldError },
+      })
     }
 
-    await HygraphService.getInstance().create(
+    await hygraphService.create(
       'Connect',
       `requestId: "${requestId}", client: "${client}", email: "${email}", message: "${message}", name: "${name}", subject: "${subject}"`
     )
@@ -99,15 +73,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       sent: true,
       requestId,
     })
-  } catch (err) {
-    console.error(`[api/connect] ${err}`)
+  } catch (e) {
+    console.error(`[api->connect] ${e}`)
 
-    HygraphService.getInstance().create(
+    await hygraphService.create(
       'Connect',
       `requestId: "${requestId}", client: "${client}", errorDump: "${JSON.stringify(
-        {
-          err,
-        }
+        { e }
       )}"`
     )
 
