@@ -6,7 +6,11 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   showLoader?: boolean
 }
 
-const Button = ({ children, showLoader = false, ...rest }: ButtonProps) => {
+export const Button = ({
+  children,
+  showLoader = false,
+  ...rest
+}: ButtonProps) => {
   return (
     <StyledButton {...rest}>
       {showLoader && <Loader size={20} color="#fff" />}
@@ -15,9 +19,7 @@ const Button = ({ children, showLoader = false, ...rest }: ButtonProps) => {
   )
 }
 
-export default Button
-
-export const StyledButton = styled.button`
+const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
