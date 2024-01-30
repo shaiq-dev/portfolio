@@ -10,7 +10,7 @@ import Settings from './Settings'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const Header = () => {
+const SiteHeader = () => {
   const ref = useRef<HTMLDivElement>(null)
   const [sticky, setSticky] = useState(false)
 
@@ -66,4 +66,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default SiteHeader

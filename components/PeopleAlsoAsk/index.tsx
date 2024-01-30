@@ -1,5 +1,5 @@
-import SectionHeader from 'components/Base/SectionHeader'
-import Accordion from 'components/Base/Accordion'
+import SectionHeader from 'components/SectionHeading'
+import Accordion from 'components/base/Accordion'
 
 const paragraph =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet Lorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. EvenLorem ipsum dolor sit amet consectetur adipisicing elit. Even natus sint provident vel ab reprehenderit cum soluta, suscipit facere nisi sed earum repellendus fuga debitis, nam molestiae minima voluptates possimus.'

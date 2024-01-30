@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic'
 import { cloneElement, useRef, useState } from 'react'
 
-import { RenderIf } from 'components/Common'
+import { RenderIf } from 'components/common'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
 import { TooltipArrow, TooltipArrowBg, TooltipContainer } from './_styled'
 
 const Portal = dynamic(
-  () => import('components/Common').then((m) => m.Portal),
+  () => import('components/common').then((m) => m.Portal),
   { ssr: false }
 )
 

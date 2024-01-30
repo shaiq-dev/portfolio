@@ -3,7 +3,7 @@ export type LoaderProps = React.ComponentPropsWithoutRef<'svg'> & {
   color: string
 }
 
-export const Loader = ({ size, color, ...others }: LoaderProps) => {
+const Loader = ({ size, color, ...others }: LoaderProps) => {
   const { style, ...rest } = others
   return (
     <svg
@@ -31,3 +31,5 @@ export const Loader = ({ size, color, ...others }: LoaderProps) => {
     </svg>
   )
 }
+
+export default Loader

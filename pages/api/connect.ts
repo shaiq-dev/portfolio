@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { v4 as uuid } from 'uuid'
 import UaParser from 'ua-parser-js'
 
-import { AppStrings } from 'constants/index'
+import { AppErrors } from 'constants/index'
 import HygraphService from 'services/hygraph'
 import { isEmail, isEmpty, isValidLength } from 'utils/validators'
 
@@ -37,9 +37,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const fieldError: { [K in AllowedFields]?: string } = {}
 
     if (isEmpty(email)) {
-      fieldError['email'] = AppStrings.EMPTY_FIELD_ERROR
+      fieldError['email'] = AppErrors.EMPTY_FIELD_ERROR
     } else if (!isEmail(email)) {
-      fieldError['email'] = AppStrings.INVALID_EMAIL_ERROR
+      fieldError['email'] = AppErrors.INVALID_EMAIL_ERROR
     }
 
     Object.entries({ name, subject, message }).forEach(
@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const field = k as AllowedFields
         const bounds = VALID_FIELD_LENGTH[field]
         if (isEmpty(v)) {
-          fieldError[field] = AppStrings.EMPTY_FIELD_ERROR
+          fieldError[field] = AppErrors.EMPTY_FIELD_ERROR
         } else if (!isValidLength(v, bounds)) {
           fieldError[field] = `${k.replace(
             /^./,
@@ -85,7 +85,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res
       .status(500)
-      .json({ sent: false, error: AppStrings.SERVER_ERROR, requestId })
+      .json({ sent: false, error: AppErrors.SERVER_ERROR, requestId })
   }
 }
 

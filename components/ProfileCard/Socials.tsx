@@ -1,5 +1,4 @@
-import Constants from 'constants/index'
-
+import { SocialProfiles } from 'constants/index'
 import { SocialsProfileList, SocialsProfileListItem } from './_styled'
 
 const Socials = () => {
@@ -7,7 +6,7 @@ const Socials = () => {
     <div className="profile-card-section">
       <div className="profile-card-section-title">Profiles</div>
       <SocialsProfileList>
-        {Constants.Profiles.map(({ name, handle, icon: Icon }, index) => {
+        {SocialProfiles.map(({ name, handle, icon: Icon }, index) => {
           return (
             <SocialsProfileListItem key={index}>
               <a

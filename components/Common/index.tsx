@@ -26,6 +26,3 @@ export const RenderIf = ({
 }: React.PropsWithChildren<{ isTrue: boolean }>) => {
   return isTrue ? <>{children}</> : <></>
 }
-
-// Other exports
-export * from './Loader'

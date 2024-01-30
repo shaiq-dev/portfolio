@@ -1,4 +1,6 @@
-export default function Blog() {
+import { withLayout } from 'layout/index'
+
+function Blog() {
   return (
     <div>
       <div
@@ -11,3 +13,5 @@ export default function Blog() {
     </div>
   )
 }
+
+export default withLayout(Blog)

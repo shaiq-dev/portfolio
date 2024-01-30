@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { HiGlobeAsiaAustralia } from 'react-icons/hi2'
 
-import Constants from 'constants/index'
+import { Api, AppStrings } from 'constants/index'
 import {
   ProfileCardAvatar,
   ProfileCardBio,
@@ -17,7 +17,7 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
   const [resumeLink, setResumeLink] = useState('')
 
   useEffect(() => {
-    fetch(Constants.Api.Resume)
+    fetch(Api.RESUME)
       .then((res) => res.json())
       .then((res) => {
         setResumeLink(res.artifact)
@@ -30,8 +30,8 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
         <ProfileCardHeader>
           <ProfileCardTitle>
             <div>
-              <h2>Shaiq Kar</h2>
-              <span>A Coder</span>
+              <h2>{AppStrings.PROFILE_CARD_NAME}</h2>
+              <span>{AppStrings.PROFILE_CARD_TITLE}</span>
             </div>
             <div></div>
           </ProfileCardTitle>
@@ -52,7 +52,7 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
             <span className="icon">
               <HiGlobeAsiaAustralia size={24} />
             </span>
-            Download Resume
+            {AppStrings.PROFILE_CARD_RESUME_LINK_TEXT}
           </a>
         </ProfileCardResume>
         <ProfileCardBio>{bio}</ProfileCardBio>

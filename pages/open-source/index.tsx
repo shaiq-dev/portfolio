@@ -1,4 +1,6 @@
-export default function OpenSource() {
+import { withLayout } from 'layout/index'
+
+function OpenSource() {
   return (
     <div>
       <div
@@ -11,3 +13,5 @@ export default function OpenSource() {
     </div>
   )
 }
+
+export default withLayout(OpenSource)

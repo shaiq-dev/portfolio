@@ -5,15 +5,15 @@ import { useState } from 'react'
  * to indicate error or else `null`. If a field is optional set to
  * `undefined`.
  */
-type FormValidators<T> = {
+export type FormValidators<T> = {
   [K in keyof T]: ((value: T[K]) => string | null) | undefined
 }
 
-type FormErrors<T> = { [K in keyof T]?: string }
+export type FormErrors<T> = { [K in keyof T]?: string }
 
-type FormInputFocus<T> = { [K in keyof T]?: boolean }
+export type FormInputFocus<T> = { [K in keyof T]?: boolean }
 
-type FormHandlers = {
+export type FormHandlers = {
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void
@@ -25,7 +25,7 @@ type FormHandlers = {
   ) => void
 }
 
-type FormGetInputProps<T> = <K extends keyof T>(
+export type FormGetInputProps<T> = <K extends keyof T>(
   name: K
 ) => {
   name: K
@@ -37,7 +37,7 @@ type FormGetInputProps<T> = <K extends keyof T>(
   error: string | undefined
 }
 
-type UseFormReturnType<T> = {
+export type UseFormReturnType<T> = {
   /**
    * Value object, storing all form values
    */
@@ -62,7 +62,7 @@ type UseFormReturnType<T> = {
 /**
  * Hook for handling form input and validation
  */
-export const useForm = <T extends Record<string, unknown>>({
+export const useForm = <T extends Record<string, string>>({
   initialValues,
   validators,
 }: {

@@ -4,7 +4,7 @@ import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi2'
 
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
-import SectionHeader from 'components/Base/SectionHeader'
+import SectionHeader from 'components/SectionHeading'
 import { MediumShortPost } from 'types/index'
 import PostItem from './PostItem'
 import {

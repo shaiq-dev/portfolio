@@ -1,7 +1,29 @@
 import styled, { css } from 'styled-components'
+
 import { InterpolatedCss } from 'types/index'
 
-export const HeadingContainer = styled.h3<{
+export type HeadingProps = React.PropsWithChildren<{
+  gradient?: { from: string; to: string }
+  size?: 'xl' | 'lg' | 'md' | 'sm'
+  extraCss?: InterpolatedCss
+}>
+
+const Heading = ({
+  children,
+  gradient,
+  size = 'xl',
+  extraCss = css``,
+}: HeadingProps) => {
+  return (
+    <StyledHeading $size={size} $gradient={gradient} $css={extraCss}>
+      {children}
+    </StyledHeading>
+  )
+}
+
+export default Heading
+
+export const StyledHeading = styled.h3<{
   $size: 'xl' | 'lg' | 'md' | 'sm'
   $gradient?: { from: string; to: string }
   $css?: InterpolatedCss
@@ -35,7 +57,6 @@ export const HeadingContainer = styled.h3<{
   ${(props) =>
     props.$gradient &&
     css`
-      // colors
       background-color: ${props.$gradient.from};
       background-image: linear-gradient(
         180deg,
@@ -50,6 +71,5 @@ export const HeadingContainer = styled.h3<{
       -moz-text-fill-color: transparent;
     `}
 
-    /* Extra CSS passed in props */
     ${(props) => props.$css}
 `

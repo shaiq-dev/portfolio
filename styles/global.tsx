@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-import { GoogleLogos } from 'constants/index'
+import { LinkedAssets } from 'constants/index'
 import {
   DoodleBackgroud,
   DoodleContainer,
@@ -8,7 +8,7 @@ import {
   SearchInputContainer,
   SearchInputWrapper,
   SettingsContainer,
-} from 'components/Header/_styled'
+} from 'components/SiteHeader/_styled'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -263,7 +263,7 @@ export const GlobalErrorStyle = createGlobalStyle`
     padding: 30px 0 15px;
     color: #222;
     font: 15px/22px arial, sans-serif;
-    background: url(${GoogleLogos.robot}) 100% 5px no-repeat;
+    background: url(${LinkedAssets.GOOGLE_ROBOT}) 100% 5px no-repeat;
     padding-right: 205px;
   }
 
@@ -277,7 +277,6 @@ export const GlobalErrorStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  /* Responsiveness */
   @media screen and (max-width: 772px) {
     body {
       background: none;

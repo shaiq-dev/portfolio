@@ -1,4 +1,4 @@
-import Constants from 'constants/index'
+import { LinkedAssets } from 'constants/index'
 import { SettingsContainer, SettingsProfileContainer } from './_styled'
 
 const Settings = () => {
@@ -6,7 +6,7 @@ const Settings = () => {
     <SettingsContainer>
       <SettingsProfileContainer>
         <div>
-          <img src={Constants.Assets.SettingsProfileAvatar} />
+          <img src={LinkedAssets.SETTINGS_PROFILE_AVATAR} />
         </div>
       </SettingsProfileContainer>
     </SettingsContainer>

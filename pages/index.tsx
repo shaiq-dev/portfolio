@@ -1,17 +1,14 @@
 import { kv } from '@vercel/kv'
 
-import { AppBar } from 'components/Widgets'
+import CommitCount from 'components/CommitCount'
 import WorkExperience from 'components/WorkExperience'
 import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
 import PeopleAlsoAsk from 'components/PeopleAlsoAsk'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import HygraphService from 'services/hygraph'
-import {
-  HomeCenterColumn,
-  HomeContainer,
-  HomeRightColumn,
-} from 'styles/_pages.styled'
+import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
+import { withLayout } from 'layout/index'
 
 type HomePageProps = {
   workExperience: Experience
@@ -21,26 +18,20 @@ type HomePageProps = {
   posts: MediumShortPost[]
 }
 
-export default function Home({
-  workExperience,
-  commits,
-  avatar,
-  bio,
-  posts,
-}: HomePageProps) {
+function Home({ workExperience, commits, avatar, bio, posts }: HomePageProps) {
   return (
     <>
-      <AppBar commits={commits} />
-      <HomeContainer>
-        <HomeCenterColumn>
+      <CommitCount count={commits} />
+      <PageContainer>
+        <PageCenterColumn>
           <WorkExperience data={workExperience} />
           <LatestPosts posts={posts} />
           <PeopleAlsoAsk />
-        </HomeCenterColumn>
-        <HomeRightColumn>
+        </PageCenterColumn>
+        <PageRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
-        </HomeRightColumn>
-      </HomeContainer>
+        </PageRightColumn>
+      </PageContainer>
       <div style={{ height: '1500px', background: '#fff' }}></div>
     </>
   )
@@ -102,3 +93,5 @@ export const getStaticProps = async () => {
     props,
   }
 }
+
+export default withLayout(Home)

@@ -2,7 +2,7 @@ import NavLink from 'next/link'
 import { useRouter } from 'next/router'
 import { IconType } from 'react-icons'
 
-import Constants from 'constants/index'
+import { MainNavLinks } from 'constants/index'
 import {
   TopNavContainer,
   TopNavWrapper,
@@ -39,7 +39,7 @@ const TopNav = () => {
         <nav>
           <div>
             <TopNavLinks>
-              {Constants.Nav.map(({ name, path, icon }, index) => (
+              {MainNavLinks.map(({ name, path, icon }, index) => (
                 <NavLink href={path} key={index}>
                   <TopNavItem
                     lablel={name}
