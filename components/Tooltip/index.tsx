@@ -1,14 +1,13 @@
 import dynamic from 'next/dynamic'
 import { cloneElement, useRef, useState } from 'react'
 
-import { RenderIf } from 'components/common'
+import { RenderIf } from 'components/util'
 import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicEffect'
 import { TooltipArrow, TooltipArrowBg, TooltipContainer } from './_styled'
 
-const Portal = dynamic(
-  () => import('components/common').then((m) => m.Portal),
-  { ssr: false }
-)
+const Portal = dynamic(() => import('components/util').then((m) => m.Portal), {
+  ssr: false,
+})
 
 export type TooltipAlignment = 'top' | 'right' | 'bottom' | 'left'
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { RenderIf } from 'components/common'
+import { RenderIf } from 'components/util'
 
 export type SectionHeadingProps = {
   heading: string
