@@ -3,7 +3,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi2'
 
 import { AppStrings } from 'constants/index'
 import { UseFormReturnType } from 'hooks/useForm'
-import { Button, Input, TextArea } from 'components/forms'
+import { Button, Input, TextArea } from 'components/form'
 
 export type ConnectFormSubmitResponse = {
   isError: boolean
