@@ -24,3 +24,11 @@ export const xTimeAgo = (date: Date) => {
 
   return 'Not Available'
 }
+
+/**
+ * Check if we are on server or client
+ */
+export const isSSR = () =>
+  typeof window === 'undefined' ||
+  !window.navigator ||
+  /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
