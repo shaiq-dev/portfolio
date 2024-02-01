@@ -2,6 +2,47 @@ import { useRef, useState } from 'react'
 import { HiChevronDown } from 'react-icons/hi2'
 import styled from 'styled-components'
 
+const Accordion = ({
+  label,
+  children,
+}: React.PropsWithChildren<{ label: string }>) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+
+  const handleClick = () => {
+    if (contentRef.current) {
+      if (!isOpen) {
+        contentRef.current.style.gridTemplateRows = '1fr'
+        contentRef.current.style.paddingBottom = '12px'
+      } else {
+        contentRef.current.style.gridTemplateRows = '0fr'
+        contentRef.current.style.paddingBottom = '0px'
+      }
+    }
+
+    setIsOpen((prev) => !prev)
+  }
+
+  return (
+    <div>
+      <AccordionLabelWrapper onClick={handleClick}>
+        <Label>
+          <h2>{label}</h2>
+        </Label>
+        <Icon style={{ transform: `rotate(${isOpen ? 180 : 0}deg)` }}>
+          <HiChevronDown strokeWidth="1.5" size={16} color="var(--gray-2)" />
+        </Icon>
+      </AccordionLabelWrapper>
+      <AccordionContent ref={contentRef}>
+        <div className="content">{children}</div>
+      </AccordionContent>
+      <Border />
+    </div>
+  )
+}
+
+export default Accordion
+
 const AccordionLabelWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -44,44 +85,3 @@ const AccordionContent = styled.div`
 const Border = styled.div`
   border-bottom: 1px solid var(--gray-1);
 `
-
-const Accordion = ({
-  label,
-  children,
-}: React.PropsWithChildren<{ label: string }>) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const contentRef = useRef<HTMLDivElement | null>(null)
-
-  const handleClick = () => {
-    if (contentRef.current) {
-      if (!isOpen) {
-        contentRef.current.style.gridTemplateRows = '1fr'
-        contentRef.current.style.paddingBottom = '12px'
-      } else {
-        contentRef.current.style.gridTemplateRows = '0fr'
-        contentRef.current.style.paddingBottom = '0px'
-      }
-    }
-
-    setIsOpen((prev) => !prev)
-  }
-
-  return (
-    <div>
-      <AccordionLabelWrapper onClick={handleClick}>
-        <Label>
-          <h2>{label}</h2>
-        </Label>
-        <Icon style={{ transform: `rotate(${isOpen ? 180 : 0}deg)` }}>
-          <HiChevronDown strokeWidth="1.5" size={16} color="var(--gray-2)" />
-        </Icon>
-      </AccordionLabelWrapper>
-      <AccordionContent ref={contentRef}>
-        <div className="content">{children}</div>
-      </AccordionContent>
-      <Border />
-    </div>
-  )
-}
-
-export default Accordion
