@@ -8,12 +8,12 @@ export interface CompanyPosition {
   description: string
 }
 
-export type WorkExperience = Array<{
+export type WorkExperience = {
   id: string
   company: string
   description: string
   positions: CompanyPosition[]
-}>
+}
 
 export type MediumShortPost = {
   title: string

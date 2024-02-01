@@ -11,7 +11,7 @@ import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
 import { withLayout } from 'layout/index'
 
 type HomePageProps = {
-  workExperience: Experience
+  workExperience: Experience[]
   commits: number
   avatar: string
   bio: string
