@@ -25,3 +25,13 @@ export const PageRightColumn = styled.div`
   padding-bottom: 15px;
   transition: opacity 0.3s;
 `
+
+export const AsGoogleLink = styled.div`
+  display: inline-block;
+  line-height: 1.3;
+  margin-bottom: 3px;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--blue-1);
+  padding-top: 5px;
+`

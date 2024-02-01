@@ -4,29 +4,39 @@ import CommitCount from 'components/CommitCount'
 import WorkExperience from 'components/WorkExperience'
 import LatestPosts from 'components/LatestPosts'
 import ProfileCard from 'components/ProfileCard'
-import PeopleAlsoAsk from 'components/PeopleAlsoAsk'
+import PeopleAlsoAsk, {
+  type PeopleAlsoAskQuestion,
+} from 'components/PeopleAlsoAsk'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import HygraphService from 'services/hygraph'
 import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
 import { withLayout } from 'layout/index'
 
 type HomePageProps = {
-  workExperience: Experience[]
+  workExperiences: Experience[]
   commits: number
   avatar: string
   bio: string
   posts: MediumShortPost[]
+  peopleAlsoAskQuestions: PeopleAlsoAskQuestion[]
 }
 
-function Home({ workExperience, commits, avatar, bio, posts }: HomePageProps) {
+function Home({
+  workExperiences,
+  commits,
+  avatar,
+  bio,
+  posts,
+  peopleAlsoAskQuestions,
+}: HomePageProps) {
   return (
     <>
       <CommitCount count={commits} />
       <PageContainer>
         <PageCenterColumn>
-          <WorkExperience data={workExperience} />
+          <WorkExperience experiences={workExperiences} />
           <LatestPosts posts={posts} />
-          <PeopleAlsoAsk />
+          <PeopleAlsoAsk questions={peopleAlsoAskQuestions} />
         </PageCenterColumn>
         <PageRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
@@ -40,7 +50,8 @@ function Home({ workExperience, commits, avatar, bio, posts }: HomePageProps) {
 export const getStaticProps = async () => {
   const hygraphService = HygraphService.getInstance()
 
-  const { workExperiences } = await hygraphService.query(`
+  const { workExperiences, configurations, peopleAlsoAskQuestions } =
+    await hygraphService.query(`
     {
       workExperiences {
         company
@@ -54,19 +65,38 @@ export const getStaticProps = async () => {
           description
         }
       }
-    }
-  `)
 
-  const { configurations } = await hygraphService.query(`
-    {
       configurations {
         profileBio
         profileCardAvatar {
           url
         }
       }
+
+      peopleAlsoAskQuestions {
+        question
+        description
+        hasSearchResult
+        searchResultLink {
+          website
+          icon {
+            url
+          }
+          cite
+          href
+          title
+        }
+        searchResultGoogleUrl
+      }
     }
   `)
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  peopleAlsoAskQuestions.forEach((question: any) => {
+    if (question.searchResultLink) {
+      question.searchResultLink.icon = question.searchResultLink.icon.url
+    }
+  })
 
   const { profileBio, profileCardAvatar } = configurations[0]
 
@@ -82,11 +112,12 @@ export const getStaticProps = async () => {
   const posts = Object.values(postsSet) as MediumShortPost[]
 
   const props: HomePageProps = {
-    workExperience: workExperiences,
+    workExperiences,
     commits,
     avatar: profileCardAvatar.url,
     bio: profileBio,
     posts,
+    peopleAlsoAskQuestions,
   }
 
   return {

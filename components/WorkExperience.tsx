@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
 import type { WorkExperience as Experience } from 'types/index'
+import { AsGoogleLink } from 'styles/shared'
 
-const WorkExperience = ({ data }: { data: Experience[] }) => {
+const WorkExperience = ({ experiences }: { experiences: Experience[] }) => {
   const getDate = (date: string) => {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -13,20 +14,20 @@ const WorkExperience = ({ data }: { data: Experience[] }) => {
   return (
     <ExperienceWrapper className="experience">
       <ExperienceHeader>Work Experience</ExperienceHeader>
-      {data.map((work) => {
+      {experiences.map((experience) => {
         return (
-          <div key={work.id}>
-            <CompanyName>{work.company}</CompanyName>
-            <div>{work.description}</div>
+          <div key={experience.id}>
+            <AsGoogleLink>{experience.company}</AsGoogleLink>
+            <div>{experience.description}</div>
             <CompanyPositionsList>
-              {work.positions.map((position) => {
+              {experience.positions.map((position) => {
                 return (
                   <CompanyPosition key={position.id}>
                     <PositionDuration>
                       {getDate(position.startDate)} ›{' '}
                       {position.endDate ? getDate(position.endDate) : 'Present'}{' '}
                     </PositionDuration>
-                    <PositionName as="h3">{position.role}</PositionName>
+                    <AsGoogleLink as="h3">{position.role}</AsGoogleLink>
                     <div>{position.description}</div>
                   </CompanyPosition>
                 )
@@ -56,16 +57,6 @@ const ExperienceHeader = styled.div`
   display: block;
 `
 
-const CompanyName = styled.div`
-  display: inline-block;
-  line-height: 1.3;
-  margin-bottom: 3px;
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--blue-1);
-  padding-top: 5px;
-`
-
 const CompanyPositionsList = styled.div`
   margin-left: 15px;
 `
@@ -77,6 +68,5 @@ const CompanyPosition = styled.div`
     padding-top: 16px;
   }
 `
-const PositionName = styled(CompanyName)``
 
 const PositionDuration = styled(ExperienceHeader)``
