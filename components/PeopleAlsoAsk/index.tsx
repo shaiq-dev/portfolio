@@ -5,6 +5,8 @@ import Accordion from 'components/Accordion'
 import SearchResultLink, {
   type SearchResultLinkProps,
 } from 'components/SearchResultLink'
+import { vstring } from 'utils/vstring'
+import { AppStrings } from 'constants/index'
 
 export type PeopleAlsoAskQuestion = {
   question: string
@@ -25,14 +27,16 @@ const PeopleAlsoAsk = ({ questions }: PeopleAlsoAskProps) => {
       <div>
         {questions.map((item, idx) => (
           <Accordion key={idx} label={item.question}>
-            <QuestionDescription>{item.description}</QuestionDescription>
+            <QuestionDescription>
+              {vstring(item.description)}
+            </QuestionDescription>
 
             {item.hasSearchResult && item.searchResultLink && (
               <>
                 <SearchResultLink {...item.searchResultLink} />
                 {item.searchResultGoogleUrl && (
                   <GoogleSearchResultUrl>
-                    Search for:{' '}
+                    {AppStrings.PEOPLE_ALSO_ASK_RESULT_URL_PREFIX}{' '}
                     <a
                       className="link"
                       target="_blank"

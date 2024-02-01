@@ -26,6 +26,7 @@ export const AppStrings = {
   FOOTER_COPYRIGHT_NAME: 'Shaiq Kar',
   FOOTER_COPYRIGHT_CONTENT:
     'Google and the Google logo are registered trademarks of Google LLC.',
+  PEOPLE_ALSO_ASK_RESULT_URL_PREFIX: 'Search For:',
   ERROR_PAGE_HEAD_TITLE: 'Error 404 (Not Found)!!1',
   ERROR_PAGE_TITLE: 'That’s an error.',
   ERROR_PAGE_404_DESCRIPTION: ` The requested URL $1 was not found on this server`,

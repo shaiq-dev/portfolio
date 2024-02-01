@@ -32,3 +32,25 @@ export const isSSR = () =>
   typeof window === 'undefined' ||
   !window.navigator ||
   /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
+
+/**
+ * Returns Date in duration of years.
+ * e.g, 1.2 years or 7 months
+ */
+export const asDuration = (date: Date) => {
+  const diff = new Date().getTime() - date.getTime()
+  const months = diff / 2630016000
+  const monthsLeftAfterYears = Math.floor(months % 12)
+  const duration = Math.floor(months / 12) / (monthsLeftAfterYears / 12)
+
+  const format = (count: number, unit: string) =>
+    `${unit}${count === 1 ? '' : 's'}`
+
+  if (duration >= 1) {
+    return `${duration.toFixed(1)} ${format(duration, 'year')}`
+  }
+
+  return duration > 0
+    ? `${monthsLeftAfterYears} ${format(monthsLeftAfterYears, 'month')}`
+    : 'less than a month'
+}
