@@ -15,6 +15,8 @@ const GIT_USER = process.env.GIT_USER
 const blackListedRepos = [...(process.env.BLACK_LISTED_REPOS || '').split(',')]
 const blackListedOrgs = [...(process.env.BLACK_LISTED_ORGS || '').split(',')]
 
+const blacklisted = (await kv.hget('actions', 'blacklisted')).split(',')
+
 const PluggedKit = Octokit.plugin(throttling, paginateRest, restEndpointMethods)
 const octokit = new PluggedKit({
   auth: GIT_TOKEN,
@@ -32,7 +34,7 @@ const octokit = new PluggedKit({
         return true
       }
     },
-    onAbuseLimit: (retryAfter, options, octokit) => {
+    onSecondaryRateLimit: (retryAfter, options, octokit) => {
       octokit.log.warn(
         `Abuse detected for request ${options.method} ${options.url}`
       )
@@ -51,6 +53,7 @@ const repos = (
   })
 )
   .map((repo) => repo.full_name)
+  .filter((repo) => !blacklisted.includes(repo))
   .filter((repo) => !blackListedRepos.includes(repo))
   .filter((repo) => !blackListedOrgs.includes(repo.split('/')[0]))
 
