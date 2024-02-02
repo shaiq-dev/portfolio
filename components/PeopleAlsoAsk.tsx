@@ -27,10 +27,10 @@ const PeopleAlsoAsk = ({ questions }: PeopleAlsoAskProps) => {
       <div>
         {questions.map((item, idx) => (
           <Accordion key={idx} label={item.question}>
-            <QuestionDescription>
-              {vstring(item.description)}
-            </QuestionDescription>
-
+            <QuestionDescription
+              className="highlight"
+              dangerouslySetInnerHTML={{ __html: vstring(item.description) }}
+            />
             {item.hasSearchResult && item.searchResultLink && (
               <>
                 <SearchResultLink {...item.searchResultLink} />

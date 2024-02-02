@@ -7,7 +7,7 @@ export type SearchResultLinkProps = {
   icon: string
   cite: string
   href: string
-  linkTitle: string
+  title: string
 }
 
 const SearchResultLink = ({
@@ -15,7 +15,7 @@ const SearchResultLink = ({
   icon,
   cite,
   href,
-  linkTitle,
+  title,
 }: SearchResultLinkProps) => {
   return (
     <a href={href} target="_blank" rel="noreferrer">
@@ -30,7 +30,7 @@ const SearchResultLink = ({
           </div>
         </div>
       </div>
-      <AsGoogleLink>{linkTitle}</AsGoogleLink>
+      <AsGoogleLink>{title}</AsGoogleLink>
     </a>
   )
 }

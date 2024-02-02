@@ -134,6 +134,12 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: var(--section-gap);
   }
 
+  .highlight > b {
+    background-color: rgba(80, 151, 255, 0.18);
+    color: #040c28;
+    font-weight: 500;
+  }
+
 
   /* Header Sticky Styles */
 
@@ -200,6 +206,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /* CSS variable reset based on size */
+  
   @media (min-width:1459px) and (max-width:1659px) {
     :root {
       --center-abs-margin: calc(25vw + -184.75px)
