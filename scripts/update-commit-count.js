@@ -7,15 +7,9 @@ import { kv } from '@vercel/kv'
 const GIT_TOKEN = process.env.GIT_TOKEN
 const GIT_USER = process.env.GIT_USER
 
-/**
- * These are empty repos. GitHub Api returns an error if
- * trying to request any data from them. This list can
- * also include the orgs you want to ignore.
- */
-const blackListedRepos = [...(process.env.BLACK_LISTED_REPOS || '').split(',')]
-const blackListedOrgs = [...(process.env.BLACK_LISTED_ORGS || '').split(',')]
-
-const blacklisted = (await kv.hget('actions', 'blacklisted')).split(',')
+// List of repo's to be ignored. Example repo-abc,some-org/repo-xyz
+const KV_ACTIONS_SET = 'actions'
+const blacklisted = (await kv.hget(KV_ACTIONS_SET, 'blacklisted')).split(',')
 
 const PluggedKit = Octokit.plugin(throttling, paginateRest, restEndpointMethods)
 const octokit = new PluggedKit({
@@ -54,8 +48,6 @@ const repos = (
 )
   .map((repo) => repo.full_name)
   .filter((repo) => !blacklisted.includes(repo))
-  .filter((repo) => !blackListedRepos.includes(repo))
-  .filter((repo) => !blackListedOrgs.includes(repo.split('/')[0]))
 
 // Get branches for all repos
 const repoTree = {}
@@ -81,7 +73,6 @@ const commitsCount = (
   await Promise.all(
     Object.entries(repoTree).map(async ([repo, branches]) => {
       const [org, repoName] = repo.split('/')
-      console.log(`[${repoName}]`)
       const contributions = await Promise.all(
         branches.map(async (branch) => {
           const commits = await octokit.paginate(
