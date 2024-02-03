@@ -32,6 +32,8 @@ export const AppStrings = {
   ERROR_PAGE_404_DESCRIPTION: ` The requested URL $1 was not found on this server`,
   ERROR_PAGE_WHAT_WE_KNOW: 'That’s all we know.',
   ERROR_PAGE_OTHER_ERROR_DESCRIPTION: 'Something went wrong on this server.',
+  DATA_INFO_COMMITS:
+    'This is the real count of my public commmits, updated daily using github actiions and a small script I wrote - https://github.com/shaiq-dev/portfolio/blob/main/scripts/update-commit-count.js',
 }
 
 export const AppErrors = {

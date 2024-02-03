@@ -2,12 +2,13 @@ import styled from 'styled-components'
 
 export type CommitCountProps = {
   count: number
+  info: string
 }
 
-const CommitCount = ({ count }: CommitCountProps) => {
+const CommitCount = ({ count, info }: CommitCountProps) => {
   return (
     <CommitCountLabel>
-      <span>About {count} commits</span>
+      <span data-info={info}>About {count} commits</span>
     </CommitCountLabel>
   )
 }

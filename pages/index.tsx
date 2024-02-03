@@ -11,6 +11,7 @@ import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
 import HygraphService from 'services/hygraph'
 import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
 import { withLayout } from 'layout/index'
+import { AppStrings } from 'constants/index'
 
 type HomePageProps = {
   workExperiences: Experience[]
@@ -31,7 +32,7 @@ function Home({
 }: HomePageProps) {
   return (
     <>
-      <CommitCount count={commits} />
+      <CommitCount count={commits} info={AppStrings.DATA_INFO_COMMITS} />
       <PageContainer>
         <PageCenterColumn>
           <WorkExperience experiences={workExperiences} />
