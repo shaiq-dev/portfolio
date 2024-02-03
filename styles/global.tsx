@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     --bg-secondary: #f2f2f2;
     --text-heading: #202124;
 
+    --font: arial, Helvetica, sans-serif;
     --font-heading: Google Sans, arial, sans-serif;
     --lh-norm: 1.58;
   }
@@ -44,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     background-color: var(--bg-primary);
-    font-family: arial, Helvetica, sans-serif;
+    font-family: var(--font);
     font-size: 14px;
   }
 

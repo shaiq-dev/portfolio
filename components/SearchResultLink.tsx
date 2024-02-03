@@ -30,6 +30,7 @@ const SearchResultLink = ({
           </div>
         </div>
       </div>
+      <div />
       <AsGoogleLink>{title}</AsGoogleLink>
     </a>
   )

@@ -65,6 +65,28 @@ const QuestionDescription = styled.div`
   font-family: var(--font-heading);
   font-size: 16px;
   line-height: 24px;
+
+  .link {
+    font-size: 14px;
+  }
+
+  .has-image-pair {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 160px;
+    width: 204px;
+
+    img {
+      transition: transform 200ms;
+    }
+
+    &:hover {
+      cursor: pointer;
+      img {
+        transform: scale(1.15);
+      }
+    }
+  }
 `
 
 const GoogleSearchResultUrl = styled.div`
