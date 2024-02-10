@@ -8,6 +8,9 @@ import PeopleAlsoAsk, {
   type PeopleAlsoAskQuestion,
 } from 'components/PeopleAlsoAsk'
 import type { MediumShortPost, WorkExperience as Experience } from 'types/index'
+import RelatedSearches, {
+  type RelatedSearchItem,
+} from 'components/RelatedSearches'
 import HygraphService from 'services/hygraph'
 import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
 import { withLayout } from 'layout/index'
@@ -20,6 +23,7 @@ type HomePageProps = {
   bio: string
   posts: MediumShortPost[]
   peopleAlsoAskQuestions: PeopleAlsoAskQuestion[]
+  relatedSearchesItems: RelatedSearchItem[]
 }
 
 function Home({
@@ -29,6 +33,7 @@ function Home({
   bio,
   posts,
   peopleAlsoAskQuestions,
+  relatedSearchesItems,
 }: HomePageProps) {
   return (
     <>
@@ -38,6 +43,7 @@ function Home({
           <WorkExperience experiences={workExperiences} />
           <LatestPosts posts={posts} />
           <PeopleAlsoAsk questions={peopleAlsoAskQuestions} />
+          <RelatedSearches items={relatedSearchesItems} />
         </PageCenterColumn>
         <PageRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
@@ -51,8 +57,12 @@ function Home({
 export const getStaticProps = async () => {
   const hygraphService = HygraphService.getInstance()
 
-  const { workExperiences, configurations, peopleAlsoAskQuestions } =
-    await hygraphService.query(`
+  const {
+    workExperiences,
+    configurations,
+    peopleAlsoAskQuestions,
+    relatedSearches,
+  } = await hygraphService.query(`
     {
       workExperiences {
         company
@@ -89,6 +99,15 @@ export const getStaticProps = async () => {
         }
         searchResultGoogleUrl
       }
+
+      relatedSearches (
+        where: {
+          enabled: true
+        }
+      ) {
+        query_
+        href
+      }
     }
   `)
 
@@ -119,6 +138,7 @@ export const getStaticProps = async () => {
     bio: profileBio,
     posts,
     peopleAlsoAskQuestions,
+    relatedSearchesItems: relatedSearches,
   }
 
   return {

@@ -23,7 +23,7 @@ export type PeopleAlsoAskProps = {
 const PeopleAlsoAsk = ({ questions }: PeopleAlsoAskProps) => {
   return (
     <div className="with-section-gap">
-      <SectionHeading heading="People also ask" />
+      <SectionHeading heading={AppStrings.PEOPLE_ALSO_ASK_HEADING} />
       <div>
         {questions.map((item, idx) => (
           <Accordion key={idx} label={item.question}>

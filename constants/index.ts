@@ -34,6 +34,8 @@ export const AppStrings = {
   ERROR_PAGE_OTHER_ERROR_DESCRIPTION: 'Something went wrong on this server.',
   DATA_INFO_COMMITS:
     'This is the real count of my public commmits, updated daily using github actiions and a small script I wrote - https://github.com/shaiq-dev/portfolio/blob/main/scripts/update-commit-count.js',
+  PEOPLE_ALSO_ASK_HEADING: 'People also ask',
+  RELATED_SEARCHES_HEADING: 'Related searches',
 }
 
 export const AppErrors = {
