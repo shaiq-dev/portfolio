@@ -15,6 +15,7 @@ import HygraphService from 'services/hygraph'
 import { PageCenterColumn, PageContainer, PageRightColumn } from 'styles/shared'
 import { withLayout } from 'layout/index'
 import { AppStrings } from 'constants/index'
+import FollowUp from 'components/FollowUp'
 
 type HomePageProps = {
   workExperiences: Experience[]
@@ -43,13 +44,13 @@ function Home({
           <WorkExperience experiences={workExperiences} />
           <LatestPosts posts={posts} />
           <PeopleAlsoAsk questions={peopleAlsoAskQuestions} />
+          <FollowUp />
           <RelatedSearches items={relatedSearchesItems} />
         </PageCenterColumn>
         <PageRightColumn>
           <ProfileCard avatar={avatar} bio={bio} />
         </PageRightColumn>
       </PageContainer>
-      <div style={{ height: '1500px', background: '#fff' }}></div>
     </>
   )
 }

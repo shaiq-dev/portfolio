@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --blue-1: #1a0dab;
     --blue-2: #1a73e8;
     --blue-3: #417dff;
+    --blue-4: #638ed4;
     --gray-1: #dadce0;
     --gray-2: #70757a;
     --gray-3: #4d5156;
@@ -133,6 +134,10 @@ const GlobalStyle = createGlobalStyle`
 
   .with-section-gap {
     margin-bottom: var(--section-gap);
+  }
+
+  .with-border-bottom {
+    border-bottom: 1px solid var(--gray-1);
   }
 
   .highlight > b {

@@ -22,7 +22,7 @@ export type PeopleAlsoAskProps = {
 
 const PeopleAlsoAsk = ({ questions }: PeopleAlsoAskProps) => {
   return (
-    <div className="with-section-gap">
+    <div>
       <SectionHeading heading={AppStrings.PEOPLE_ALSO_ASK_HEADING} />
       <div>
         {questions.map((item, idx) => (

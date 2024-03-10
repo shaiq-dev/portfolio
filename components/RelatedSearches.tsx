@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import SectionHeading from 'components/SectionHeading'
 import SearchIcon from 'assets/icons/search.svg'
 import { AppStrings } from 'constants/index'
+import dynamic from 'next/dynamic'
 
 export type RelatedSearchItem = {
   // Hygraph does not allow to use `query` as a name
@@ -34,7 +35,9 @@ const RelatedSearches = ({ items }: RelatedSearchesProps) => {
   )
 }
 
-export default RelatedSearches
+export default dynamic(() => Promise.resolve(RelatedSearches), {
+  ssr: false,
+})
 
 const RelatedSearchesWrapper = styled.div`
   display: grid;

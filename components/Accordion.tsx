@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
-import { HiChevronDown } from 'react-icons/hi2'
 import styled from 'styled-components'
+import { HiChevronDown } from 'react-icons/hi2'
 
 const Accordion = ({
   label,
@@ -34,9 +34,9 @@ const Accordion = ({
         </Icon>
       </AccordionLabelWrapper>
       <AccordionContent ref={contentRef}>
-        <div className="content">{children}</div>
+        <div style={{ overflow: 'hidden' }}>{children}</div>
       </AccordionContent>
-      <Border />
+      <div className="with-border-bottom" />
     </div>
   )
 }
@@ -76,12 +76,4 @@ const AccordionContent = styled.div`
   width: 100%;
   grid-template-rows: 0fr;
   transition: grid-template-rows 320ms ease-in-out;
-
-  > .content {
-    overflow: hidden;
-  }
-`
-
-const Border = styled.div`
-  border-bottom: 1px solid var(--gray-1);
 `

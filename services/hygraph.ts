@@ -92,7 +92,7 @@ export default class HygraphService {
   }
 
   /**
-   * Execute the gql query on hygraphs hight performance readonly
+   * Execute the gql query on hygraphs high performance readonly
    * api or read/write content api
    */
   async query(query: string, target: HygraphEndpointTarget = 'hp') {
