@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import { HiGlobeAsiaAustralia } from 'react-icons/hi2'
 
 import { Api, AppStrings } from 'constants/index'
