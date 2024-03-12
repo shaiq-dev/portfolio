@@ -14,16 +14,6 @@ import {
 import Socials from './Socials'
 
 const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
-  const [resumeLink, setResumeLink] = useState('')
-
-  useEffect(() => {
-    fetch(Api.RESUME)
-      .then((res) => res.json())
-      .then((res) => {
-        setResumeLink(res.artifact)
-      })
-  }, [])
-
   return (
     <ProfileCardContainer className="profile">
       <div>
@@ -43,11 +33,10 @@ const ProfileCard = ({ avatar, bio }: { avatar: string; bio: string }) => {
         </ProfileCardHeader>
         <ProfileCardResume>
           <a
-            href={resumeLink}
+            href={Api.RESUME}
             target="_blank"
             className="link"
             rel="noreferrer"
-            title={resumeLink ? undefined : 'Loading'}
           >
             <span className="icon">
               <HiGlobeAsiaAustralia size={24} />

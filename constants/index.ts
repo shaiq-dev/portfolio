@@ -46,7 +46,7 @@ export const AppErrors = {
 }
 
 export const Api = {
-  RESUME: 'https://960t3mahl7.execute-api.ap-south-1.amazonaws.com/call/',
+  RESUME: 'https://resume.shaiqkar.dev',
   CONNECT: '/api/connect',
 }
 
