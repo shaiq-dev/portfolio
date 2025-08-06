@@ -2,9 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    // domains: ['media.graphcms.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -18,6 +16,14 @@ const nextConfig = {
       },
     ],
     disableStaticImages: true,
+  },
+  turbopack: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
   },
   webpack(config) {
     config.module.rules.push({

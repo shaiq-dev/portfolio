@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --site-header-height: 46px;
+  --site-header-search-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  --site-header-search-shadow-hover: 0 2px 8px 1px rgb(64 60 67 / 24%);
+  --site-header-search-bar-width: 692px;
+  --doodle-container-height: 69px;
+  --doodle-bg-height: 127px;
+  --font: arial, Helvetica, sans-serif;
+  --font-heading: Google Sans, arial, sans-serif;
+  --center-abs-margin: 180px;
+  --center-width: 652px;
+  --r-margin: 60px;
+  --r-width: 369px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  @apply bg-white;
+}
+
+h2 {
+  @apply font-heading text-[30px] font-normal leading-[1.2] text-heading;
+}
+
+hr {
+  @apply m-0 border-0 border-b border-ash-100;
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  // Google style search links
+  .google-search-link {
+    @apply mb-[3px] inline-block pt-[5px] text-xl font-normal leading-[1.3] text-ocean-100;
+  }
+
+  .highlight-b > b {
+    @apply bg-[rgba(80,151,255,0.18)] font-medium text-[#040c28];
+  }
+
+  .link {
+    @apply text-ocean-100 hover:underline;
+  }
+
+  ._border-transparent {
+    @apply border border-solid border-transparent;
+  }
+
+  ._section {
+    @apply mb-11;
+  }
+
+  ._translate-3d {
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  ._no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  ._gradient-text {
+    --google-green: #34a853;
+    --google-blue: #1a73e8;
+    background-color: var(--google-green);
+    background-image: linear-gradient(180deg, var(--google-green) 20%, var(--google-blue) 80%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+  }
+}

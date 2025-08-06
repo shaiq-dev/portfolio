@@ -7,12 +7,12 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
 
       - name: Install dependencies
         working-directory: scripts
@@ -21,32 +21,12 @@ jobs:
       - name: Update Commit Count
         working-directory: scripts
         env:
-          ACTIVE_CONFIG_VERSION: ${{ secrets.ACTIVE_CONFIG_VERSION }}
-          BLACK_LISTED_BOTS: ${{ secrets.BLACK_LISTED_BOTS }}
-          BLACK_LISTED_ORGS: ${{ secrets.BLACK_LISTED_ORGS }}
-          BLACK_LISTED_REPOS: ${{ secrets.BLACK_LISTED_REPOS }}
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-          GIT_USER: ${{ secrets.GIT_USER }}
-          HYGRAPH_ENDPOINT: ${{ secrets.HYGRAPH_ENDPOINT }}
-          HYGRAPH_TOKEN: ${{ secrets.HYGRAPH_TOKEN }}
-          VERCEL_DEPLOYMENT_HOOK: ${{ secrets.VERCEL_DEPLOYMENT_HOOK }}
+          GIT_PAT_TOKEN: ${{ secrets.GIT_PAT_TOKEN }}
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          BLACKLISTED_REPOS: ${{ secrets.BLACKLISTED_REPOS }}
           KV_URL: ${{ secrets.KV_URL }}
           KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
           KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           KV_REST_API_READ_ONLY_TOKEN: ${{ secrets.KV_REST_API_READ_ONLY_TOKEN }}
         run: |
-          env \
-            ACTIVE_CONFIG_VERSION=$ACTIVE_CONFIG_VERSION \
-            BLACK_LISTED_BOTS=$BLACK_LISTED_BOTS \
-            BLACK_LISTED_ORGS=$BLACK_LISTED_ORGS \
-            BLACK_LISTED_REPOS=$BLACK_LISTED_REPOS \
-            GIT_TOKEN=$GIT_TOKEN \
-            GIT_USER=$GIT_USER \
-            HYGRAPH_ENDPOINT=$HYGRAPH_ENDPOINT \
-            HYGRAPH_TOKEN=$HYGRAPH_TOKEN \
-            VERCEL_DEPLOYMENT_HOOK=$VERCEL_DEPLOYMENT_HOOK \
-            KV_URL=$KV_URL \
-            KV_REST_API_URL=$KV_REST_API_URL \
-            KV_REST_API_TOKEN=$KV_REST_API_TOKEN \
-            KV_REST_API_READ_ONLY_TOKEN=$KV_REST_API_READ_ONLY_TOKEN \
             node --no-warnings update-commit-count.js
