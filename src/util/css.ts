@@ -5,9 +5,8 @@ const extendedMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       shadow: [
-        'shadow-search-bar-rest',
-        'shadow-search-bar-rest-hover',
-        'shadow-search-bar-sticky-hover',
+        'shadow-search-bar',
+        'shadow-search-bar-hover',
         'shadow-site-header-doodle',
         'shadow-carousel-control',
       ],

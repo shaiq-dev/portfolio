@@ -36,7 +36,7 @@ export const FollowUp = () => {
         >
           <input
             placeholder={t('peopleAlsoAsk.followUp.placeholder')}
-            className="h-[46px] grow border-0 bg-inherit p-[10px_0px] font-heading text-base font-normal leading-5 text-[#001d35] outline-0"
+            className="font-heading h-[46px] grow border-0 bg-inherit p-[10px_0px] text-base leading-5 font-normal text-[#001d35] outline-0"
           />
           <div className="flex h-full items-center">
             <div className="m-[0px_8px] inline-block size-5 leading-6">
@@ -48,8 +48,8 @@ export const FollowUp = () => {
           </div>
         </div>
       </div>
-      <div className="flex h-4 items-center text-[12px] text-ash-200">
-        <div className="h-px w-full bg-ash-100" />
+      <div className="text-ash-200 flex h-4 items-center text-[12px]">
+        <div className="bg-ash-100 h-px w-full" />
         <span className="ml-3.5">{t('peopleAlsoAsk.followUp.feedback.title')}</span>
       </div>
     </div>

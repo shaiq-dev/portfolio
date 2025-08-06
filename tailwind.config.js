@@ -8,6 +8,7 @@ module.exports = {
           100: '#dadce0',
           200: '#70757a',
           300: '#4d5156',
+          400: '#474747',
         },
         ocean: {
           100: '#1a0dab',
@@ -21,9 +22,8 @@ module.exports = {
       },
       boxShadow: {
         'site-header-doodle': '0 1px 6px 0 rgb(32 33 36 / 28%)',
-        'search-bar-rest': '0 2px 5px 1px rgb(64 60 67 / 16%)',
-        'search-bar-rest-hover': '0 2px 8px 1px rgb(64 60 67 / 24%)',
-        'search-bar-sticky-hover': '0 1px 6px rgb(32 33 36 / 28%)',
+        'search-bar': '0px 3px 10px 0px rgba(31, 31, 31, 0.08)',
+        'search-bar-hover': '0px 3px 10px 0px rgba(31, 31, 31, 0.14)',
         'carousel-control': '0 0 0 1px rgb(0 0 0 / 4%), 0 4px 8px 0 rgb(0 0 0 / 20%)',
       },
       fontFamily: {

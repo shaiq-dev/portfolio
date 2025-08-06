@@ -37,7 +37,7 @@ export const RelatedSearches = ({ searches }: Props) => {
                 <SearchIcon fill="currentColor" />
               </div>
               <span
-                className="ml-[26px] line-clamp-2 max-w-[227px] flex-1 text-base text-heading"
+                className="text-heading ml-[26px] line-clamp-2 max-w-[227px] flex-1 text-base"
                 dangerouslySetInnerHTML={{
                   __html: search.query_,
                 }}

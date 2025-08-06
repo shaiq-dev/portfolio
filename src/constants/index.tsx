@@ -34,3 +34,5 @@ export const GOOGLE_ASSETS = {
     Robot: '//www.google.com/images/errors/robot.png',
   },
 }
+
+export { TEXT_CONTENT } from './content'

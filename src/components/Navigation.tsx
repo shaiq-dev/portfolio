@@ -54,7 +54,7 @@ const Route = (props: RouteProps) => {
         {isValidElement(icon) && cloneElement(icon, { className: 'size-4' })}
       </span>
       {name}
-      {active && <div className="mt-[11px] h-[3px] bg-ocean-200" />}
+      {active && <div className="bg-ocean-200 mt-[11px] h-[3px]" />}
     </Link>
   )
 }
@@ -67,8 +67,8 @@ export const Navigation = () => {
   }
 
   return (
-    <div className="relative z-40 -mt-[21px] border-b border-solid border-[#ebebeb] font-heading font-normal text-ash-200">
-      <div className="relative z-[51] h-[58px]  whitespace-nowrap bg-white">
+    <div className="font-heading text-ash-200 relative z-40 -mt-[21px] border-b border-solid border-[#ebebeb] font-normal">
+      <div className="relative z-[51] h-[58px] bg-white whitespace-nowrap">
         <nav className="relative box-content flex items-baseline whitespace-nowrap">
           <div>
             <div className="ml-[169px] box-content inline">

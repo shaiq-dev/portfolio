@@ -4,11 +4,11 @@ export default function ConnectPage() {
   return (
     <div className="_page">
       <div className="_page-center">
-        <div className="mb-3 mt-9">
-          <h2 className="_gradient-text font-heading text-[60px] font-bold leading-[72px] -tracking-[0.5px]">
+        <div className="mt-9 mb-3">
+          <h2 className="_gradient-text font-heading text-[60px] leading-[72px] font-bold -tracking-[0.5px]">
             Talk to a Google specialist
           </h2>
-          <div className="mb-9 mt-6 font-heading text-lg font-light text-ash-200">
+          <div className="font-heading text-ash-200 mt-6 mb-9 text-lg font-light">
             Haha! kidding, say hi to me
           </div>
           <form className="w-[517px] pb-9">

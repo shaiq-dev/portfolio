@@ -50,7 +50,7 @@ export const PeopleAlsoAsk = ({ questions }: Props) => {
           {questions.map((question, idx) => (
             <AccordionItem key={idx} value={question.ask}>
               <div
-                className="highlight-b m-[10px_0px_0px_0px] p-[0px_24px_10px_0px] font-heading text-base leading-6 text-ash-300"
+                className="highlight-b font-heading text-ash-300 m-[10px_0px_0px_0px] p-[0px_24px_10px_0px] text-base leading-6"
                 dangerouslySetInnerHTML={{
                   __html: sb(question.answer),
                 }}
@@ -62,7 +62,7 @@ export const PeopleAlsoAsk = ({ questions }: Props) => {
                     <div className="pt-5 text-base">
                       {t('peopleAlsoAsk.googleSearchLinkTitle')}
                       <a
-                        className="_link"
+                        className="link"
                         target="_blank"
                         rel="noreferrer"
                         href={`https://www.google.com/search?q=${question.searchResultGoogleUrl}`}

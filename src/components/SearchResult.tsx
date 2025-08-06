@@ -11,13 +11,13 @@ const SearchResult = ({ website, iconUrl, cite, href, title }: Props) => {
             <img className="size-5" src={iconUrl} />
           </div>
           <div>
-            <div className="block whitespace-nowrap text-sm leading-5 text-heading">{website}</div>
-            <div className="text-[12px] leading-[18px] text-ash-300">{cite}</div>
+            <div className="text-heading block text-sm leading-5 whitespace-nowrap">{website}</div>
+            <div className="text-ash-300 text-[12px] leading-[18px]">{cite}</div>
           </div>
         </div>
       </div>
       <div />
-      <div className="_google-link">{title}</div>
+      <div className="google-search-link">{title}</div>
     </a>
   )
 }

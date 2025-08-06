@@ -30,12 +30,12 @@ export const ProfileCard = () => {
   const { t } = useText()
 
   return (
-    <div className="ml-px mt-1.5 rounded-lg border border-solid border-ash-100 bg-white pb-4 text-sm leading-norm">
+    <div className="border-ash-100 leading-norm mt-1.5 ml-px rounded-lg border border-solid bg-white pb-4 text-sm">
       <div>
-        <div className="flex items-center overflow-hidden rounded-t-lg border-b border-solid border-ash-100">
+        <div className="border-ash-100 flex items-center overflow-hidden rounded-t-lg border-b border-solid">
           <div className="flex-1 px-[15px] py-3">
             <h2>{t('profile.name')}</h2>
-            <div className="my-1 text-ash-200">{t('profile.description')}</div>
+            <div className="text-ash-200 my-1">{t('profile.description')}</div>
           </div>
           <div className="flex min-h-40 max-w-40 items-center">
             <div className="m-4 h-full">
@@ -48,17 +48,17 @@ export const ProfileCard = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center border-b border-solid border-ash-100 py-2 leading-norm">
-          <a href={'https://resume.shaiq.dev'} target="_blank" className="_link" rel="noreferrer">
-            <span className="ml-[15px] mr-6 inline-block size-6 align-middle text-ash-200">
+        <div className="border-ash-100 leading-norm flex items-center border-b border-solid py-2">
+          <a href={'https://resume.shaiq.dev'} target="_blank" className="link" rel="noreferrer">
+            <span className="text-ash-200 mr-6 ml-[15px] inline-block size-6 align-middle">
               <HiGlobeAsiaAustralia size={24} />
             </span>
             {t('profile.mainLinkText')}
           </a>
         </div>
-        <div className="mb-1.5 mt-[13px] px-[15px] text-ash-300">{t('profile.about')}</div>
+        <div className="text-ash-300 mt-[13px] mb-1.5 px-[15px]">{t('profile.about')}</div>
         <div className="px-[15px]">
-          <div className="mt-6 font-heading text-lg leading-6">
+          <div className="font-heading mt-6 text-lg leading-6">
             {t('profile.sections.social.title')}
           </div>
           <SocialProfiles profiles={SOCIAL_PROFILES} />

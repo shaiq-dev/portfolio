@@ -1,4 +1,4 @@
-export const content = {
+export const TEXT_CONTENT = {
   footer: {
     country: 'India',
     copyright: {
@@ -9,7 +9,7 @@ export const content = {
   profile: {
     name: 'Shaiq Kar',
     description: 'A Coder',
-    mainLinkText: 'Download Resume',
+    mainLinkText: 'Download CV',
     about:
       'Uniting the ideals of math with the efficiency of computers to solve problems in our complex world.',
     sections: {
@@ -22,7 +22,7 @@ export const content = {
     heading: 'People also ask',
     googleSearchLinkTitle: 'Search For ',
     followUp: {
-      placeholder: 'Ask a followup',
+      placeholder: 'Ask a follow up',
       feedback: {
         title: 'Feedback',
       },

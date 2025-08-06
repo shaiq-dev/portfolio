@@ -16,7 +16,7 @@ export const ErrorWrapper = ({ code, title, description, kind }: Props) => {
         style={{
           background: `url(${GOOGLE_ASSETS.Images.Robot}) 100% 5px no-repeat`,
         }}
-        className="font-arial mx-auto mt-[7%] box-content min-h-[180px] max-w-[390px] pb-[15px] pr-[205px] pt-[30px] text-[15px] leading-[22px] text-[#222] max-[772px]:mt-0 max-[772px]:max-w-none max-[772px]:bg-none max-[772px]:pr-0"
+        className="font-arial mx-auto mt-[7%] box-content min-h-[180px] max-w-[390px] pt-[30px] pr-[205px] pb-[15px] text-[15px] leading-[22px] text-[#222] max-[772px]:mt-0 max-[772px]:max-w-none max-[772px]:bg-none max-[772px]:pr-0"
       >
         <Link href="/">
           <style>

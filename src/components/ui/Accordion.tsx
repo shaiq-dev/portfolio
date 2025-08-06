@@ -58,7 +58,7 @@ export const AccordionItem = ({ value, children }: AccordionItemProps) => {
       >
         <div className="overflow-hidden">{children}</div>
       </div>
-      <div className="border-b border-solid border-ash-100" />
+      <div className="border-ash-100 border-b border-solid" />
     </div>
   )
 }

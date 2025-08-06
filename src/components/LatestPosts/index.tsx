@@ -1,14 +1,15 @@
 'use client'
 
 import { useRef, useState, useCallback } from 'react'
+import gsap from 'gsap'
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2'
+
 import { Post } from './Post'
 import Section from '@/components/Section'
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-effect'
 import type { ShortPost, VoidCallback } from '@/types'
-import cn from 'classnames'
-import gsap from 'gsap'
-import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2'
+import { cn } from '@/util'
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -133,15 +134,15 @@ export const LatestPosts = ({ posts }: Props) => {
                   <div
                     key={idx}
                     className={cn(
-                      'group absolute -right-3.5 -top-12 bottom-0 z-20 m-[auto_0px] block h-9 w-9 cursor-pointer',
+                      'group absolute -top-12 -right-3.5 bottom-0 z-20 m-[auto_0px] block h-9 w-9 cursor-pointer',
                       {
-                        '-left-3.5 right-[initial]': dir === 'prev',
+                        'right-[initial] -left-3.5': dir === 'prev',
                       }
                     )}
                   >
                     <button
                       onClick={cb}
-                      className="relative z-0 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-full border border-solid border-ash-100 bg-white text-ash-200 outline-0 group-hover:text-heading group-hover:shadow-carousel-control"
+                      className="border-ash-100 text-ash-200 group-hover:text-heading group-hover:shadow-carousel-control relative z-0 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-full border border-solid bg-white outline-0"
                     >
                       {dir === 'prev' ? (
                         <HiChevronLeft size={16} strokeWidth={1.8} />

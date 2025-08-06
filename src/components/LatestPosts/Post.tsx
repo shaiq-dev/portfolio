@@ -14,15 +14,15 @@ export const Post = ({ title, link, thumbnail, pubDate, categories }: Props) => 
                 <img src={thumbnail} alt={title} className="block size-full" />
               </div>
               <div className="pt-4">
-                <div className="pointer-events-none mb-2 truncate text-sm text-ash-200 !no-underline">
+                <div className="text-ash-200 pointer-events-none mb-2 truncate text-sm !no-underline">
                   {categories.map((tag, index) => (
                     <span key={index}>#{tag} </span>
                   ))}
                 </div>
-                <div className="line-clamp-4 h-24 whitespace-normal text-base text-ocean-100 group-hover:underline">
+                <div className="text-ocean-100 line-clamp-4 h-24 text-base whitespace-normal group-hover:underline">
                   {title}
                 </div>
-                <div className="mt-2 text-sm leading-4 text-ash-200">
+                <div className="text-ash-200 mt-2 text-sm leading-4">
                   {xTimeAgo(new Date(pubDate))}
                 </div>
               </div>

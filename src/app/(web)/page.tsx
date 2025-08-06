@@ -83,7 +83,7 @@ const HomePage = async () => {
 
   return (
     <>
-      <div className="ml-[--center-abs-margin] flex h-[43px] items-center font-heading text-sm text-ash-200">
+      <div className="font-heading text-ash-200 ml-[--center-abs-margin] flex h-[43px] items-center text-sm">
         <span>About {commits} commits</span>
       </div>
       <Page

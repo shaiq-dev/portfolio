@@ -35,7 +35,7 @@ export const SiteHeader = () => {
         position: 'absolute',
         onComplete: () => setSticky(true),
       })
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
+
       tl.add(() => {}, '+=0.5')
       tl.to(ref.current, {
         top: 0,
@@ -57,12 +57,12 @@ export const SiteHeader = () => {
     >
       <div
         className={cn('absolute left-0 -mt-5 h-[--doodle-container-height] w-full bg-white', {
-          '!h-[72px] overflow-hidden shadow-site-header-doodle': sticky,
+          'shadow-site-header-doodle !h-[72px] overflow-hidden': sticky,
         })}
       >
         <div
           className={cn(
-            'pointer-events-none absolute -ml-[15px] -mt-[15px] h-[127px] w-full opacity-100',
+            'pointer-events-none absolute -mt-[15px] -ml-[15px] h-[127px] w-full opacity-100',
             {
               'opacity-0': sticky,
             }
