@@ -1,27 +1,24 @@
 import { Octokit } from 'octokit'
-import { throttling } from '@octokit/plugin-throttling'
 import { paginateRest } from '@octokit/plugin-paginate-rest'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
+import { throttling } from '@octokit/plugin-throttling'
 import { kv } from '@vercel/kv'
+import 'dotenv/config'
 
-const GIT_TOKEN = process.env.GIT_TOKEN
-const GIT_USER = process.env.GIT_USER
+import { debug } from './util.js'
 
-// List of repo's to be ignored. Example repo-abc,some-org/repo-xyz
-const KV_ACTIONS_SET = 'actions'
-const blacklisted = (await kv.hget(KV_ACTIONS_SET, 'blacklisted')).split(',')
+const blacklistedRepos = (process.env.BLACKLISTED_REPOS || '').split(',')
+const blacklistedOrgs = (process.env.BLACKLISTED_ORGS || '').split(',')
 
 const PluggedKit = Octokit.plugin(throttling, paginateRest, restEndpointMethods)
 const octokit = new PluggedKit({
-  auth: GIT_TOKEN,
+  auth: process.env.GIT_PAT_TOKEN,
   headers: {
     Accept: 'application/vnd.github.preview',
   },
   throttle: {
     onRateLimit: (retryAfter, options, octokit) => {
-      octokit.log.warn(
-        `Request quota exhausted for request ${options.method} ${options.url}`
-      )
+      octokit.log.warn(`Request quota exhausted for request ${options.method} ${options.url}`)
 
       if (options.request.retryCount === 0) {
         octokit.log.info(`Retrying after ${retryAfter} seconds!`)
@@ -29,16 +26,17 @@ const octokit = new PluggedKit({
       }
     },
     onSecondaryRateLimit: (retryAfter, options, octokit) => {
-      octokit.log.warn(
-        `Abuse detected for request ${options.method} ${options.url}`
-      )
+      octokit.log.warn(`Abuse detected for request ${options.method} ${options.url}`)
     },
   },
 })
 
-console.log(
-  "🏁 Started the script. Let's see how many commits we have made so far"
-)
+octokit.hook.error('request', async (error, options) => {
+  octokit.log.error(`Error occurred for request ${options.method} ${options.url}`)
+  octokit.log.error(error)
+})
+
+console.log("Started the script. Let's see how many commits we have made so far")
 
 const repos = (
   await octokit.paginate(octokit.rest.repos.listForAuthenticatedUser, {
@@ -46,70 +44,56 @@ const repos = (
     per_page: 100,
   })
 )
-  .map((repo) => repo.full_name)
-  .filter((repo) => !blacklisted.includes(repo))
+  .filter(repo => {
+    const [org, name] = repo.full_name.split('/')
+    return !blacklistedOrgs.includes(org) && !blacklistedRepos.includes(name)
+  })
+  .map(repo => repo.full_name)
 
 // Get branches for all repos
 const repoTree = {}
 
 await Promise.all(
-  repos.map(async (repo) => {
+  repos.map(async repo => {
     const [org, repoName] = repo.split('/')
-    const repoBranches = await octokit.paginate(
-      octokit.rest.repos.listBranches,
-      {
-        owner: org,
-        repo: repoName,
-        per_page: 100,
-      }
-    )
-    repoTree[repo] = repoBranches.map((branch) => branch.name)
+    const repoBranches = await octokit.paginate(octokit.rest.repos.listBranches, {
+      owner: org,
+      repo: repoName,
+      per_page: 100,
+    })
+    repoTree[repo] = repoBranches.map(branch => branch.name)
   })
 )
 
-console.log("🌳 Got all the branches for all the repos. Let's get the commits")
+console.log('Retrieved all branches. Proceeding to collect commit data')
 
 const commitsCount = (
   await Promise.all(
     Object.entries(repoTree).map(async ([repo, branches]) => {
       const [org, repoName] = repo.split('/')
       const contributions = await Promise.all(
-        branches.map(async (branch) => {
-          const commits = await octokit.paginate(
-            octokit.rest.repos.listCommits,
-            {
-              owner: org,
-              repo: repoName,
-              sha: branch,
-              author: GIT_USER,
-              per_page: 100,
-            }
-          )
-          return commits.map((commit) => commit.sha)
+        branches.map(async branch => {
+          const commits = await octokit.paginate(octokit.rest.repos.listCommits, {
+            owner: org,
+            repo: repoName,
+            sha: branch,
+            author: process.env.GIT_USERNAME,
+            per_page: 100,
+          })
+          return commits.map(commit => commit.sha)
         })
       )
       const count = new Set(contributions.flat()).size
-      console.log(`${repoName} | ${count}`)
+      debug(`${org} | ${repoName} | ${count}`)
       return count
     })
   )
 ).reduce((acc, curr) => acc + curr, 0)
 
-console.log(`Total ${commitsCount} 💪 made so far`)
+console.log(`Total ${commitsCount} commits 💪 made so far`)
 
 /**
- * The total can be stored anywhere. I am using vercel kv database
+ * Commit count can be stored anywhere. I am using vercel kv database (redis by upstash)
  * to store it.
  */
-const KV_CONFIG_SET = 'config'
-await kv.hset(KV_CONFIG_SET, { commits: commitsCount })
-
-/**
- * The website use next js `getStaticProps` which caches the props at
- * build time, so to reflect the new commits a new build is required.
- * This is better than `getServerSideProps` which increase the page
- * load time.
- */
-const DEPLOY_HOOK = process.env.VERCEL_DEPLOYMENT_HOOK
-await fetch(DEPLOY_HOOK)
-console.log(`[Vercel] New build triggered`)
+await kv.hset('config', { commits: commitsCount })

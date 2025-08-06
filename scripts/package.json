@@ -1,14 +1,13 @@
 {
-  "name": "shaiq-portfolio-scripts",
+  "name": "portfolio-scripts",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "start:commits": "node --no-warnings commits.js"
-  },
+  "scripts": {},
   "author": "Shaiq Kar",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@vercel/kv": "^1.0.1",
+    "dotenv": "^17.2.1",
     "octokit": "^2.0.10"
   }
 }

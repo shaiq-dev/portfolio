@@ -1,0 +1,30 @@
+name: Update Medium Posts
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: yarn
+
+      - name: Update Medium Posts
+        working-directory: scripts
+        env:
+          MEDIUM_FEED_API: ${{ secrets.MEDIUM_FEED_API }}
+          KV_URL: ${{ secrets.KV_URL }}
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          KV_REST_API_READ_ONLY_TOKEN: ${{ secrets.KV_REST_API_READ_ONLY_TOKEN }}
+        run: |
+            node --no-warnings update-medium-posts.js
