@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import './global.css'
 
 export const metadata: Metadata = {
   title: 'shaiq kar - Google Search',
-  verification: {
-    google: 'ouDVbST3T8-LW94heAgxjwU_cY7m60Qr3z3vkxt7sSU',
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdn.jsdelivr.net/gh/mortezaom/google-sans-cdn@master/fonts.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <SpeedInsights />
+        {children}
+      </body>
     </html>
   )
 }
