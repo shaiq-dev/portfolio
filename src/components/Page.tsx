@@ -5,13 +5,9 @@ export interface Props {
 
 export const Page = ({ center, right }: Props) => {
   return (
-    <div className="flex max-w-[calc(var(--center-abs-margin)+var(--center-width)+var(--r-margin)+var(--r-width))] flex-wrap justify-start">
-      <div className="relative ml-[--center-abs-margin] w-[--center-width] flex-[0_1_auto]">
-        {center}
-      </div>
-      <div className="relative ml-[--r-margin] w-[--r-width] flex-[0_1_auto] pb-[15px]">
-        {right}
-      </div>
+    <div className="max-w-[calc(theme(--spacing-center-abs-margin)+theme(--spacing-center-width)+theme(--spacing-r-margin)+theme(--spacing-r-width))] flex flex-wrap justify-start">
+      <div className="ml-center-abs-margin w-center-width relative flex-[0_1_auto]">{center}</div>
+      <div className="ml-r-margin w-r-width relative flex-[0_1_auto] pb-[15px]">{right}</div>
     </div>
   )
 }

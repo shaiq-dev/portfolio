@@ -49,14 +49,14 @@ export const SiteHeader = () => {
 
   return (
     <div
-      className={cn('absolute top-5 z-50 mt-1.5 h-[--site-header-height] w-full bg-white', {
+      className={cn('h-site-header-height absolute top-5 z-50 mt-1.5 w-full bg-white', {
         '!mt-0': sticky,
       })}
       ref={ref}
       data-sticky={sticky}
     >
       <div
-        className={cn('absolute left-0 -mt-5 h-[--doodle-container-height] w-full bg-white', {
+        className={cn('h-doodle-container-height absolute left-0 -mt-5 w-full bg-white', {
           'shadow-site-header-doodle !h-[72px] overflow-hidden': sticky,
         })}
       >
