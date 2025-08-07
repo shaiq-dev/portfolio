@@ -1,5 +1,8 @@
 name: Update Commit Count
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 1 * * *'
 
@@ -24,6 +27,7 @@ jobs:
           GIT_PAT_TOKEN: ${{ secrets.GIT_PAT_TOKEN }}
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           BLACKLISTED_REPOS: ${{ secrets.BLACKLISTED_REPOS }}
+          BLACKLISTED_ORGS: ${{ secrets.BLACKLISTED_ORGS }}
           KV_URL: ${{ secrets.KV_URL }}
           KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
           KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}

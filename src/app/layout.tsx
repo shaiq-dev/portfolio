@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import './global.scss'
+import './global.css'
 
 export const metadata: Metadata = {
   title: 'shaiq kar - Google Search',
